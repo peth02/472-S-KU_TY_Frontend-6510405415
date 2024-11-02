@@ -154,27 +154,31 @@ export default function AllEvent(){
                   ห้องเล่นบอร์ดเกม ที่หอสมุด มาเจอกันนะ..</p>
                 </div>
                 <div style={{display:'flex', justifyContent:"space-between", alignItems:'center'}}>
-                  <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
-                    <div>
-                      <Image
-                        src="/images/default-participants-picture.png"
-                        width={26}
-                        height={26}
-                      />
+                  <div style={{display:"flex",flexDirection:'column'}}>
+                    <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
+                      <div>
+                        <Image
+                          src="/images/default-participants-picture.png"
+                          width={26}
+                          height={26}
+                        />
+                      </div>
+                      <div className={styles['number-of-participants-container']}>
+                          <div>
+                            <Image
+                              src="/images/participants-icon.png"
+                              width={12}
+                              height={11}
+                            />
+                          </div>
+                          <div>
+                            <p>10</p>
+                          </div>
+                      </div>
                     </div>
-                    <div className={styles['number-of-participants-container']}>
-                        <div>
-                          <Image
-                            src="/images/participants-icon.png"
-                            width={12}
-                            height={11}
-                          />
-                        </div>
-                        <div>
-                          <p>10</p>
-                        </div>
-                    </div>
+                    <div className={styles['event-tag']}>BOARD GAME</div>
                   </div>
+                  
                   <Link href='/all-events/event'>
                     <div>
                       <button className={styles['event-detail-button']}>รายละเอียด</button>
@@ -186,345 +190,9 @@ export default function AllEvent(){
 
           </div>
 
-          <div  className={styles['event-container']}>
-            <div style={{width:'454px',height:'250px',marginBottom:'20px'}}>
-              <Image 
-                  src="/images/default-event-picture.png"
-                  layout="responsive" 
-                  width={100} // กำหนดให้เต็มหน้าจอ
-                  height={100} 
-                />
-            </div>
-            <div className={styles['event-info-container']}>
-                <div>
-                  <p style={{ fontSize: '24px', fontWeight: 'bold' }}>บอร์ดเกมมหาสนุก</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '14px', fontWeight: 'regular' }}>โดย <span style={{fontWeight:'bold'}}>หมูเด้ง ช่วยหมูเด้งด้วย</span></p>
-                </div>
-                <div className={styles['event-detail-container']}>
-                  <div>
-                    <Image
-                      src="/images/calendar-icon.png"
-                      width={18}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>2 Nov 2024</p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/images/clock-icon.png"
-                      width={20}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>09 : 00 น.</p>
-                  </div >
-                  <div>
-                    <Image
-                        src="/images/location-icon.png"
-                        width={14}
-                        height={20}
-                      />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>สำนักหอสมุดเกษตรศาสตร์</p>
-                  </div>
-                </div>
-                <div className={styles['event-description-container']}>
-                  <p>หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน
-                  ห้องเล่นบอร์ดเกม ที่หอสมุด มาเจอกันนะ..</p>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-between", alignItems:'center'}}>
-                  <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
-                    <div>
-                      <Image
-                        src="/images/default-participants-picture.png"
-                        width={26}
-                        height={26}
-                      />
-                    </div>
-                    <div className={styles['number-of-participants-container']}>
-                        <div>
-                          <Image
-                            src="/images/participants-icon.png"
-                            width={12}
-                            height={11}
-                          />
-                        </div>
-                        <div>
-                          <p>10</p>
-                        </div>
-                    </div>
-                  </div>
-                  <Link href='/all-events/event'>
-                    <div>
-                      <button className={styles['event-detail-button']}>รายละเอียด</button>
-                    </div>
-                  </Link>
+          
 
-                </div>
-            </div>
-
-          </div>
-
-          <div  className={styles['event-container']}>
-            <div style={{width:'454px',height:'250px',marginBottom:'20px'}}>
-              <Image 
-                  src="/images/default-event-picture.png"
-                  layout="responsive" 
-                  width={100} // กำหนดให้เต็มหน้าจอ
-                  height={100} 
-                />
-            </div>
-            <div className={styles['event-info-container']}>
-                <div>
-                  <p style={{ fontSize: '24px', fontWeight: 'bold' }}>บอร์ดเกมมหาสนุก</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '14px', fontWeight: 'regular' }}>โดย <span style={{fontWeight:'bold'}}>หมูเด้ง ช่วยหมูเด้งด้วย</span></p>
-                </div>
-                <div className={styles['event-detail-container']}>
-                  <div>
-                    <Image
-                      src="/images/calendar-icon.png"
-                      width={18}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>2 Nov 2024</p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/images/clock-icon.png"
-                      width={20}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>09 : 00 น.</p>
-                  </div >
-                  <div>
-                    <Image
-                        src="/images/location-icon.png"
-                        width={14}
-                        height={20}
-                      />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>สำนักหอสมุดเกษตรศาสตร์</p>
-                  </div>
-                </div>
-                <div className={styles['event-description-container']}>
-                  <p>หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน
-                  ห้องเล่นบอร์ดเกม ที่หอสมุด มาเจอกันนะ..</p>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-between", alignItems:'center'}}>
-                  <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
-                    <div>
-                      <Image
-                        src="/images/default-participants-picture.png"
-                        width={26}
-                        height={26}
-                      />
-                    </div>
-                    <div className={styles['number-of-participants-container']}>
-                        <div>
-                          <Image
-                            src="/images/participants-icon.png"
-                            width={12}
-                            height={11}
-                          />
-                        </div>
-                        <div>
-                          <p>10</p>
-                        </div>
-                    </div>
-                  </div>
-                  <Link href='/all-events/event'>
-                    <div>
-                      <button className={styles['event-detail-button']}>รายละเอียด</button>
-                    </div>
-                  </Link>
-
-                </div>
-            </div>
-
-          </div>
-
-          <div  className={styles['event-container']}>
-            <div style={{width:'454px',height:'250px',marginBottom:'20px'}}>
-              <Image 
-                  src="/images/default-event-picture.png"
-                  layout="responsive" 
-                  width={100} // กำหนดให้เต็มหน้าจอ
-                  height={100} 
-                />
-            </div>
-            <div className={styles['event-info-container']}>
-                <div>
-                  <p style={{ fontSize: '24px', fontWeight: 'bold' }}>บอร์ดเกมมหาสนุก</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '14px', fontWeight: 'regular' }}>โดย <span style={{fontWeight:'bold'}}>หมูเด้ง ช่วยหมูเด้งด้วย</span></p>
-                </div>
-                <div className={styles['event-detail-container']}>
-                  <div>
-                    <Image
-                      src="/images/calendar-icon.png"
-                      width={18}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>2 Nov 2024</p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/images/clock-icon.png"
-                      width={20}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>09 : 00 น.</p>
-                  </div >
-                  <div>
-                    <Image
-                        src="/images/location-icon.png"
-                        width={14}
-                        height={20}
-                      />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>สำนักหอสมุดเกษตรศาสตร์</p>
-                  </div>
-                </div>
-                <div className={styles['event-description-container']}>
-                  <p>หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน
-                  ห้องเล่นบอร์ดเกม ที่หอสมุด มาเจอกันนะ..</p>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-between", alignItems:'center'}}>
-                  <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
-                    <div>
-                      <Image
-                        src="/images/default-participants-picture.png"
-                        width={26}
-                        height={26}
-                      />
-                    </div>
-                    <div className={styles['number-of-participants-container']}>
-                        <div>
-                          <Image
-                            src="/images/participants-icon.png"
-                            width={12}
-                            height={11}
-                          />
-                        </div>
-                        <div>
-                          <p>10</p>
-                        </div>
-                    </div>
-                  </div>
-                  <Link href='/all-events/event'>
-                    <div>
-                      <button className={styles['event-detail-button']}>รายละเอียด</button>
-                    </div>
-                  </Link>
-
-                </div>
-            </div>
-
-          </div>
-
-          <div  className={styles['event-container']}>
-            <div style={{width:'454px',height:'250px',marginBottom:'20px'}}>
-              <Image 
-                  src="/images/default-event-picture.png"
-                  layout="responsive" 
-                  width={100} // กำหนดให้เต็มหน้าจอ
-                  height={100} 
-                />
-            </div>
-            <div className={styles['event-info-container']}>
-                <div>
-                  <p style={{ fontSize: '24px', fontWeight: 'bold' }}>บอร์ดเกมมหาสนุก</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '14px', fontWeight: 'regular' }}>โดย <span style={{fontWeight:'bold'}}>หมูเด้ง ช่วยหมูเด้งด้วย</span></p>
-                </div>
-                <div className={styles['event-detail-container']}>
-                  <div>
-                    <Image
-                      src="/images/calendar-icon.png"
-                      width={18}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>2 Nov 2024</p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/images/clock-icon.png"
-                      width={20}
-                      height={20}
-                    />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>09 : 00 น.</p>
-                  </div >
-                  <div>
-                    <Image
-                        src="/images/location-icon.png"
-                        width={14}
-                        height={20}
-                      />
-                  </div>
-                  <div style={{marginLeft:"10px", marginRight:'10px'}}>
-                    <p className={styles['event-detail-text']}>สำนักหอสมุดเกษตรศาสตร์</p>
-                  </div>
-                </div>
-                <div className={styles['event-description-container']}>
-                  <p>หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน
-                  ห้องเล่นบอร์ดเกม ที่หอสมุด มาเจอกันนะ..</p>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-between", alignItems:'center'}}>
-                  <div style={{display:'flex',justifyItems:'center',alignItems:'center'}}>
-                    <div>
-                      <Image
-                        src="/images/default-participants-picture.png"
-                        width={26}
-                        height={26}
-                      />
-                    </div>
-                    <div className={styles['number-of-participants-container']}>
-                        <div>
-                          <Image
-                            src="/images/participants-icon.png"
-                            width={12}
-                            height={11}
-                          />
-                        </div>
-                        <div>
-                          <p>10</p>
-                        </div>
-                    </div>
-                  </div>
-                  <Link href='/all-events/event'>
-                    <div>
-                      <button className={styles['event-detail-button']}>รายละเอียด</button>
-                    </div>
-                  </Link>
-
-                </div>
-            </div>
-
-          </div>
+        
 
 
 
