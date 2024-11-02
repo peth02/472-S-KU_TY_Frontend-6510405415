@@ -1,94 +1,78 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <div className={styles.header}>
+        <div className={styles['header-logo-text']}>  
+          <div>
+            <Image 
+              src="/images/tree-logo.png"
+              width={68}      // กำหนดความกว้าง
+              height={68} 
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          </div>
+          <div style={{ marginLeft: '8px' }}>
+            <p className={styles['header-text-kuty']}>KU TY</p>
+            <p style={{ fontsize: '13px',fontweight: 'medium', color:'rgba(86, 86, 86, 1)'}}>find friends for activity</p>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div>
+          <button className={styles['login-button-header']}>เข้าสู่ระบบ</button>
+        </div>
+      </div>
+
+      <div className={styles['login-container']}>
+        <div className={styles['login-logo-text']}>
+          <Image  
+            src="/images/tree-logo.png"
+            width={378}      // กำหนดความกว้าง
+            height={378}
           />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <p style={{ fontSize:'83px', fontWeight:'bold'}}>KU TY</p>
+          <p style={{ fontSize: '30px',fontweight: 'medium', color:'rgba(86, 86, 86, 1)'}}>find friends for activity</p>
+        </div>
+
+        <div className={styles['input-login-container']}>
+          <p style={{fontWeight:'bold',fontSize:'77px',marginBottom:'40px'}}>เข้าสู่ระบบ</p>
+          <div>
+            <p style={{fontSize:'16px',fontweight:'regular',marginBottom:'10px',color:'rgba(86, 86, 86, 1)'}}>บัญชีนนทรี</p>
+            <input
+              className={styles['input-login']}
+              placeholder="Input Field"
+            />
+            <p style={{marginBottom:'30px',color:'rgba(238, 29, 82, 1)', fontsize:'14px',height:'14px'}}>error</p>
+          </div>
+
+          <div>
+          <p style={{fontSize:'16px',fontweight:'regular',marginBottom:'10px',color:'rgba(86, 86, 86, 1)'}}>รหัสผ่าน</p>
+            <input
+              className={styles['input-login']}
+              placeholder="Input Password"
+            />
+            <p style={{marginBottom:'70px',color:'rgba(238, 29, 82, 1)', fontsize:'14px',height:'14px'}}>error</p>
+          </div>
+
+          <div>
+            <div style={{ marginBottom: '70px', fontSize: '16px', display: 'flex', alignItems: 'left' }}>
+              <input type="checkbox" id="rememberMe" />
+              <label htmlFor="rememberMe" style={{ marginLeft: '8px' }}>Remember Me</label>
+            </div>
+
+          </div>
+
+          <Link href='/all-events'>
+            <div >
+              <button className={styles['login-button-main']}>เข้าสู่ระบบ</button>
+            </div>
+          </Link>
+          
+        </div>
+      </div>
+      <footer>
+
       </footer>
     </div>
   );
