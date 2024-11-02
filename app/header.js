@@ -4,13 +4,13 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import { login } from "./action";
+import { redirect } from "next/navigation";
 
 export default function Header() {
   const [onLogin, setOnLogin] = useState(true);
 
   function submitLogin() {
     setOnLogin(true);
-    login();
   }
 
   function submitLogout() {
@@ -48,13 +48,16 @@ export default function Header() {
         <li className={styles["menu-item"]}>กิจกรรมที่เข้าร่วม</li>
       </ul>
 
-      <div className={styles["container"]}>
+      <div
+        className={styles["container"]}
+      >
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
+          onClick={() => redirect("/profile")}
         >
           <Image
             src="/images/default-profile-picture.png"
@@ -63,6 +66,7 @@ export default function Header() {
             alt="Profile logo"
           />
         </div>
+
         <div
           style={{
             display: "flex",
@@ -122,10 +126,7 @@ export default function Header() {
             justifyContent: "center",
           }}
         >
-          <button
-            className={styles["login-button-header"]}
-            onClick={login}
-          >
+          <button className={styles["login-button-header"]} onClick={login}>
             เข้าสู่ระบบ
           </button>{" "}
         </div>

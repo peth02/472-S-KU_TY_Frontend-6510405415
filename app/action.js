@@ -9,3 +9,11 @@ export async function login(prevState, fromData) {
 
     redirect('/all-events');
 }
+
+export async function logout(prevState, fromData) {
+    redirect('/');
+}
+
+export async function profile(prevState, fromData) {
+    redirect('/profile');
+}
