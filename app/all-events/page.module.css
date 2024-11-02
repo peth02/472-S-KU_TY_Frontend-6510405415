@@ -1,67 +1,19 @@
 .page {
   background-color: white;
-  width: 100vw;  /* ความกว้างครอบคลุม viewport ทั้งหมด */
+  width: 100vw; /* ความกว้างครอบคลุม viewport ทั้งหมด */
   height: 100vh;
   display: flex;
   flex-direction: column;
   color: black;
 }
 
-
-
-.container{
-  display: flex;
-}
-
-.header-text-kuty {
-  font-weight: bold;   /* ใช้ font-weight สำหรับความหนาของตัวอักษร */
-  font-size: 30px;
-  margin-bottom: 10px;
-     /* กำหนดขนาดตัวอักษร */
-}
-
-
-.header-container{
-  padding-left: 40px;
-  padding-right: 40px;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-}
-
-.header-logo-text{
-  display: flex;
-}
-
-.menu-item{
-  font-size: 18px;
-  font-weight: medium;
-  margin-left: 23px;
-  margin-right: 23px;
-  list-style-type: none;
-}
-
-.logout-button{
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(234, 234, 234, 1);
-}
-
-.text-username{
+.text-username {
   font-size: 15px;
   margin-right: 80px;
   margin-left: 15px;
 }
 
-.content-container{
+.content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +40,7 @@
   width: 150px;
 }
 
-.search-label{
+.search-label {
   background-color: #f9f9f9;
   font-size: 22px;
   font-weight: bold;
@@ -129,27 +81,26 @@
   margin-left: 5px;
 }
 
-.event-detail-container{
+.event-detail-container {
   display: flex;
-
 }
 
-.event-info-container{
+.event-info-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.event-detail-text{
+.event-detail-text {
   font-size: 14px;
 }
 
-.events-container{
+.events-container {
   margin-top: 45px;
   padding-top: 5px;
   margin-bottom: 100px;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 35px;
 }
 
@@ -157,10 +108,10 @@
   width: 480px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); /* ปรับค่าได้ตามต้องการ */
   border-radius: 8px;
-  padding:15px;
+  padding: 15px;
 }
 
-.event-detail-button{
+.event-detail-button {
   width: 127px;
   height: 52px;
   border: none;
@@ -170,7 +121,7 @@
   font-weight: bold;
 }
 
-.number-of-participants-container{
+.number-of-participants-container {
   background-color: rgba(5, 195, 111, 1);
   width: 56px;
   height: 25px;
