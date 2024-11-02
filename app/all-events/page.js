@@ -150,6 +150,7 @@ export default function AllEvent() {
                       alt="Participants picture"
                     />
                   </div>
+
                   <div className={styles["number-of-participants-container"]}>
                     <div>
                       <Image
@@ -162,6 +163,7 @@ export default function AllEvent() {
                     <div>
                       <p>10</p>
                     </div>
+                    <div className={styles['event-tag']}>BOARD GAME</div>
                   </div>
                 </div>
                 <Link href="/all-events/event">
@@ -174,7 +176,6 @@ export default function AllEvent() {
               </div>
             </div>
           </div>
-
           <div className={styles["event-container"]}>
             <div
               style={{ width: "454px", height: "250px", marginBottom: "20px" }}
