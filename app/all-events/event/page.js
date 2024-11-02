@@ -29,6 +29,7 @@ export default function Event() {
                   src="/images/calendar-icon.png"
                   width={18}
                   height={20}
+                  alt="Calendar icon"
                 />
                 <p className={styles['event-detail-text']}>2 Nov 2024</p>
               </div>
@@ -37,6 +38,7 @@ export default function Event() {
                   src="/images/location-icon.png"
                   width={14}
                   height={20}
+                  alt="Location icon"
                 />
                 <p className={styles['event-detail-text']}>สำนักหอสมุดเกษตรศาสตร์</p>
               </div>
@@ -46,6 +48,7 @@ export default function Event() {
                   src="/images/clock-icon.png"
                   width={20}
                   height={20}
+                  alt="Clock icon"
                 />
                 <p className={styles['event-detail-text']}>09 : 00 น.</p>
             </div>
@@ -56,6 +59,7 @@ export default function Event() {
                   src="/images/default-participants-picture.png"
                   width={46}
                   height={45}
+                  alt="Participants picture"
                 />
             </div>
             <div>
@@ -65,6 +69,7 @@ export default function Event() {
                       src="/images/participants-icon.png"
                       width={26}
                       height={23}
+                      alt="Participants icon"
                     />
                   </div>
                   <div>
