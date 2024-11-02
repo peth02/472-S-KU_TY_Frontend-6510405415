@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 
 export default function Event() {
   return (
-    <div className={styles.page}>
+    <div>
       <div className={styles["event-detail-container"]}>
         <div className={styles["event-detail-picture"]}>
           <Image
