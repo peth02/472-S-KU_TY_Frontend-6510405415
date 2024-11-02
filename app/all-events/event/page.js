@@ -11,6 +11,7 @@ export default function Event() {
             layout="responsive"
             width={100}
             height={100}
+            alt="Event picture"
           />
         </div>
 

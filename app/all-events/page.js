@@ -12,6 +12,7 @@ export default function AllEvent() {
             layout="responsive"
             width={100} // กำหนดให้เต็มหน้าจอ
             height={35}
+            alt="Event picture"
           />
         </div>
 
@@ -51,6 +52,7 @@ export default function AllEvent() {
               src="/images/search-icon.png"
               width={50} // กำหนดให้เต็มหน้าจอ
               height={45}
+              alt="Search icon"
             />
             <span>ค้นหากิจกรรม</span>
           </button>
@@ -66,6 +68,7 @@ export default function AllEvent() {
                 layout="responsive"
                 width={100} // กำหนดให้เต็มหน้าจอ
                 height={100}
+                alt="Event picture"
               />
             </div>
             <div className={styles["event-info-container"]}>
@@ -88,13 +91,19 @@ export default function AllEvent() {
                     src="/images/calendar-icon.png"
                     width={18}
                     height={20}
+                    alt="Calendar icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>2 Nov 2024</p>
                 </div>
                 <div>
-                  <Image src="/images/clock-icon.png" width={20} height={20} />
+                  <Image
+                    src="/images/clock-icon.png"
+                    width={20}
+                    height={20}
+                    alt="Clock icon"
+                  />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>09 : 00 น.</p>
@@ -104,6 +113,7 @@ export default function AllEvent() {
                     src="/images/location-icon.png"
                     width={14}
                     height={20}
+                    alt="Location icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -137,6 +147,7 @@ export default function AllEvent() {
                       src="/images/default-participants-picture.png"
                       width={26}
                       height={26}
+                      alt="Participants picture"
                     />
                   </div>
                   <div className={styles["number-of-participants-container"]}>
@@ -145,6 +156,7 @@ export default function AllEvent() {
                         src="/images/participants-icon.png"
                         width={12}
                         height={11}
+                        alt="Participants icon"
                       />
                     </div>
                     <div>
@@ -172,6 +184,7 @@ export default function AllEvent() {
                 layout="responsive"
                 width={100} // กำหนดให้เต็มหน้าจอ
                 height={100}
+                alt="Event picture"
               />
             </div>
             <div className={styles["event-info-container"]}>
@@ -194,13 +207,19 @@ export default function AllEvent() {
                     src="/images/calendar-icon.png"
                     width={18}
                     height={20}
+                    alt="Calendar icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>2 Nov 2024</p>
                 </div>
                 <div>
-                  <Image src="/images/clock-icon.png" width={20} height={20} />
+                  <Image
+                    src="/images/clock-icon.png"
+                    width={20}
+                    height={20}
+                    alt="Clock icon"
+                  />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>09 : 00 น.</p>
@@ -210,6 +229,7 @@ export default function AllEvent() {
                     src="/images/location-icon.png"
                     width={14}
                     height={20}
+                    alt="Location icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -243,6 +263,7 @@ export default function AllEvent() {
                       src="/images/default-participants-picture.png"
                       width={26}
                       height={26}
+                      alt="Participants picture"
                     />
                   </div>
                   <div className={styles["number-of-participants-container"]}>
@@ -251,6 +272,7 @@ export default function AllEvent() {
                         src="/images/participants-icon.png"
                         width={12}
                         height={11}
+                        alt="Participants icon"
                       />
                     </div>
                     <div>
@@ -278,6 +300,7 @@ export default function AllEvent() {
                 layout="responsive"
                 width={100} // กำหนดให้เต็มหน้าจอ
                 height={100}
+                alt="Event picture"
               />
             </div>
             <div className={styles["event-info-container"]}>
@@ -300,13 +323,19 @@ export default function AllEvent() {
                     src="/images/calendar-icon.png"
                     width={18}
                     height={20}
+                    alt="Calendar icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>2 Nov 2024</p>
                 </div>
                 <div>
-                  <Image src="/images/clock-icon.png" width={20} height={20} />
+                  <Image
+                    src="/images/clock-icon.png"
+                    width={20}
+                    height={20}
+                    alt="Clock icon"
+                  />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>09 : 00 น.</p>
@@ -316,6 +345,7 @@ export default function AllEvent() {
                     src="/images/location-icon.png"
                     width={14}
                     height={20}
+                    alt="Location icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -349,6 +379,7 @@ export default function AllEvent() {
                       src="/images/default-participants-picture.png"
                       width={26}
                       height={26}
+                      alt="Participants picture"
                     />
                   </div>
                   <div className={styles["number-of-participants-container"]}>
@@ -357,6 +388,7 @@ export default function AllEvent() {
                         src="/images/participants-icon.png"
                         width={12}
                         height={11}
+                        alt="Participants icon"
                       />
                     </div>
                     <div>
@@ -384,6 +416,7 @@ export default function AllEvent() {
                 layout="responsive"
                 width={100} // กำหนดให้เต็มหน้าจอ
                 height={100}
+                alt="Event picture"
               />
             </div>
             <div className={styles["event-info-container"]}>
@@ -406,13 +439,19 @@ export default function AllEvent() {
                     src="/images/calendar-icon.png"
                     width={18}
                     height={20}
+                    alt="Calendar icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>2 Nov 2024</p>
                 </div>
                 <div>
-                  <Image src="/images/clock-icon.png" width={20} height={20} />
+                  <Image
+                    src="/images/clock-icon.png"
+                    width={20}
+                    height={20}
+                    alt="Clock icon"
+                  />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>09 : 00 น.</p>
@@ -422,6 +461,7 @@ export default function AllEvent() {
                     src="/images/location-icon.png"
                     width={14}
                     height={20}
+                    alt="Location icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -455,6 +495,7 @@ export default function AllEvent() {
                       src="/images/default-participants-picture.png"
                       width={26}
                       height={26}
+                      alt="Participants picture"
                     />
                   </div>
                   <div className={styles["number-of-participants-container"]}>
@@ -463,6 +504,7 @@ export default function AllEvent() {
                         src="/images/participants-icon.png"
                         width={12}
                         height={11}
+                        alt="Participants icon"
                       />
                     </div>
                     <div>
@@ -490,6 +532,7 @@ export default function AllEvent() {
                 layout="responsive"
                 width={100} // กำหนดให้เต็มหน้าจอ
                 height={100}
+                alt="Event picture"
               />
             </div>
             <div className={styles["event-info-container"]}>
@@ -512,13 +555,19 @@ export default function AllEvent() {
                     src="/images/calendar-icon.png"
                     width={18}
                     height={20}
+                    alt="Calendar icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>2 Nov 2024</p>
                 </div>
                 <div>
-                  <Image src="/images/clock-icon.png" width={20} height={20} />
+                  <Image
+                    src="/images/clock-icon.png"
+                    width={20}
+                    height={20}
+                    alt="Clock icon"
+                  />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
                   <p className={styles["event-detail-text"]}>09 : 00 น.</p>
@@ -528,6 +577,7 @@ export default function AllEvent() {
                     src="/images/location-icon.png"
                     width={14}
                     height={20}
+                    alt="Location icon"
                   />
                 </div>
                 <div style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -561,6 +611,7 @@ export default function AllEvent() {
                       src="/images/default-participants-picture.png"
                       width={26}
                       height={26}
+                      alt="Participants picture"
                     />
                   </div>
                   <div className={styles["number-of-participants-container"]}>
@@ -569,6 +620,7 @@ export default function AllEvent() {
                         src="/images/participants-icon.png"
                         width={12}
                         height={11}
+                        alt="Participants icon"
                       />
                     </div>
                     <div>
