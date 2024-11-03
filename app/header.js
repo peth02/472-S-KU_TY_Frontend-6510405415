@@ -43,9 +43,15 @@ export default function Header() {
       </div>
 
       <ul style={{ display: "flex", alignItems: "center" }}>
-        <li className={styles["menu-item"]}>กิจกรรมทั้งหมด</li>
-        <li className={styles["menu-item"]}>กิจกรรมที่สร้าง</li>
-        <li className={styles["menu-item"]}>กิจกรรมที่เข้าร่วม</li>
+        <li className={styles["menu-item"]}>
+          <a href="/all-events">กิจกรรมทั้งหมด</a>
+        </li>
+        <li className={styles["menu-item"]}>
+          <a href="/all-events-created">กิจกรรมที่สร้าง</a>
+        </li>
+        <li className={styles["menu-item"]}>
+          <a href="/joined-events">กิจกรรมที่เข้าร่วม</a>
+        </li>
       </ul>
 
       <div
