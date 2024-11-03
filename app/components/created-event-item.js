@@ -1,8 +1,25 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { deleteEvent } from '../apis/eventApi';
 
-export default function CreatedEventItem() {
+export default function CreatedEventItem({ event, onDelete }) {
+  const [error, setError] = useState(null);
+
+  const handleDelete = async () => {
+    try {
+      await deleteEvent(event.eventId);
+      console.log("Event before delete");
+      onDelete(event.eventId); // Call the onDelete callback to update the parent component
+      console.log("Event deleted successfully");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
   return (
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
@@ -27,14 +44,14 @@ export default function CreatedEventItem() {
           ></div>
           <div>
             <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-              บอร์ดเกมมหาสนุก
+            {event.name}
             </p>
           </div>
         </div>
         <div>
           <p style={{ fontSize: "14px", fontWeight: "regular" }}>
             โดย{" "}
-            <span style={{ fontWeight: "bold" }}>หมูเด้ง ช่วยหมูเด้งด้วย</span>
+            <span style={{ fontWeight: "bold" }}>{event.createdBy ? event.createdBy.firstName + ' ' + event.createdBy.lastName : "Anonymous"}</span>
           </p>
         </div>
         <div className={styles["event-detail-container"]}>
@@ -47,7 +64,7 @@ export default function CreatedEventItem() {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>2 Nov 2024</p>
+            <p className={styles["event-detail-text"]}>{event.startDate ? event.startDate : "ไม่ระบุวัน"}</p>
           </div>
           <div>
             <Image
@@ -58,7 +75,7 @@ export default function CreatedEventItem() {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>09 : 00 น.</p>
+            <p className={styles["event-detail-text"]}>{event.startTime ? event.startTime : "ไม่ระบุเวลา"}</p>
           </div>
           <div>
             <Image
@@ -70,14 +87,13 @@ export default function CreatedEventItem() {
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             <p className={styles["event-detail-text"]}>
-              สำนักหอสมุดเกษตรศาสตร์
+              {event.location ? event.location : "ไม่กำหนดสถานที่"}
             </p>
           </div>
         </div>
         <div className={styles["event-description-container"]}>
           <p>
-            หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน ห้องเล่นบอร์ดเกม ที่หอสมุด
-            มาเจอกันนะ..
+            {event.description ? event.description : "ไม่มีคำอธิบายเพิ่มเติม"}
           </p>
         </div>
         <div
@@ -94,41 +110,61 @@ export default function CreatedEventItem() {
               alignItems: "center",
             }}
           >
-            <div>
-              <Image
-                src="/images/default-participants-picture.png"
-                width={26}
-                height={26}
-                alt="Participants picture"
-              />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyItems: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  
+                  <div className={styles["profileButtonRow"]}>
+                  <div className={styles["number-of-participants-container"]}>
+                    <div>
+                      <Image
+                        src="/images/participants-icon.png"
+                        width={12}
+                        height={11}
+                        alt="Participants icon"
+                      />
+                    </div>
+                    <div>
+                      <p>{event.attendeeCount ? event.attendeeCount : "-"}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles["event-tag"]}>BOARD GAME</div>
+              </div>
             </div>
-
-            <div className={styles["number-of-participants-container"]}>
-              <div>
-                <Image
-                  src="/images/participants-icon.png"
-                  width={12}
-                  height={11}
-                  alt="Participants icon"
-                />
+              <div
+                style={{
+                  display: "flex",
+                  gap: 12,
+                }}
+              >
+                <div>
+                  <button className={styles["edit-event-button"]}>แก้ไข</button>
+                </div>
+                <div>
+                  <button onClick={handleDelete} className={styles["delete-event-button"]}>ลบ</button>
+                </div>
               </div>
-              <div>
-                <p>10</p>
-              </div>
-              <div className={styles["event-tag"]}>BOARD GAME</div>
             </div>
-          </div>
-          <div className={styles.profileButtonRow}>
-            <Link href="/all-events/event">
-              <div>
-                <button className={styles["event-detail-button"]}>แก้ไข</button>
-              </div>
-            </Link>
-            <Link href="/all-events/event">
-              <div>
-                <button className={styles["event-delete-button"]}>ลบ</button>
-              </div>
-            </Link>
           </div>
         </div>
       </div>

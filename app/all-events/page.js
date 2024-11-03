@@ -1,9 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import AllEventItem from "../components/all-event-item";
+import { fetchAllEvents } from "../apis/eventApi";
 
 export default function AllEvent() {
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchAllEvents()
+      .then((data) => {
+        console.log(data);
+        setEvents(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error);
+      });
+  }, []);
+
+  if (error) {
+    return <div>Error loading events: {error.message}</div>;
+  }
+
+  if (events.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <div className={styles["content-container"]}>
@@ -60,12 +87,9 @@ export default function AllEvent() {
         </div>
 
         <div className={styles["events-container"]}>
-          <AllEventItem />
-          <AllEventItem />
-          <AllEventItem />
-          <AllEventItem />
-          <AllEventItem />
-          <AllEventItem />
+          {events.map((event) => (
+            <AllEventItem key={event.eventId} event={event} />
+          ))}
         </div>
       </div>
     </div>

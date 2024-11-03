@@ -1,26 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation';
 import Image from "next/image";
 import styles from "./page.module.css";
-import { fetchEventDetails } from "../../apis/event/api";
+import { fetchEventData } from "../../apis/eventApi";
 
 export default function Event() {
+  const searchParams = useSearchParams();
+  const eventId = searchParams.get('eventId');
   const [eventDetails, setEventDetails] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const eventId = "3bdc045a-c95d-4954-a590-cfe1d10e51bd"; // Replace with dynamic event ID if needed
-    fetchEventDetails(eventId)
-      .then((response) => {
-        console.log(response["data"]);
-        setEventDetails(response["data"]);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error);
-      });
-  }, []);
+    console.log("Event ID:", eventId);
+    if (eventId) {
+      console.log("Fetching event details for event ID:", eventId);
+      fetchEventData(eventId)
+        .then((data) => {
+          console.log(data);
+          setEventDetails(data);
+          console.log("Event details loaded successfully");
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error);
+        });
+    }
+  }, [eventId]);
 
   if (error) {
     return <div>Error loading event details: {error.message}</div>;

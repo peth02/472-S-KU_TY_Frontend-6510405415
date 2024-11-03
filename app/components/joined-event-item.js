@@ -1,15 +1,32 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { quitEvent } from "../apis/userApi";
 
-export default function JoinedEventItem() {
+export default function JoinedEventItem({ event, userId, onQuit }) {
+  const [error, setError] = useState(null);
+
+  const handleQuit = async () => {
+    try {
+      await quitEvent(event.eventId, userId);
+      console.log("Event before quit");
+      onQuit(event.eventId); // Call the onQuit callback to update the parent component
+      console.log("Event quit successfully");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
         <Image
           src="/images/default-event-picture.png"
           layout="responsive"
-          width={100} // กำหนดให้เต็มหน้าจอ
+          width={100}
           height={100}
           alt="Event picture"
         />
@@ -19,14 +36,13 @@ export default function JoinedEventItem() {
         <div className={styles["profileNameRow"]}>
           <div>
             <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-              บอร์ดเกมมหาสนุก
+              {event?.name || "Event Name"}
             </p>
           </div>
         </div>
         <div>
           <p style={{ fontSize: "14px", fontWeight: "regular" }}>
-            โดย{" "}
-            <span style={{ fontWeight: "bold" }}>หมูเด้ง ช่วยหมูเด้งด้วย</span>
+            โดย <span style={{ fontWeight: "bold" }}>John Doe</span>
           </p>
         </div>
         <div className={styles["event-detail-container"]}>
@@ -62,14 +78,14 @@ export default function JoinedEventItem() {
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             <p className={styles["event-detail-text"]}>
-              สำนักหอสมุดเกษตรศาสตร์
+              Library of Agriculture
             </p>
           </div>
         </div>
         <div className={styles["event-description-container"]}>
           <p>
-            หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน ห้องเล่นบอร์ดเกม ที่หอสมุด
-            มาเจอกันนะ..
+            Looking for friends to play board games together at the library
+            Let's meet up..
           </p>
         </div>
         <div
@@ -111,16 +127,20 @@ export default function JoinedEventItem() {
             </div>
           </div>
           <div className={styles.profileButtonRow}>
-            <Link href="/all-events/event">
-              <div>
-                <button className={styles["event-detail-button"]}>รายละเอียด</button>
-              </div>
-            </Link>
-            <Link href="/all-events/event">
-              <div>
-                <button className={styles["event-delete-button"]}>ออก</button>
-              </div>
-            </Link>
+            <div>
+              <button className={styles["event-detail-button"]}>
+                รายละเอียด
+              </button>
+            </div>
+
+            <div>
+              <button
+                onClick={handleQuit}
+                className={styles["event-delete-button"]}
+              >
+                ออก
+              </button>
+            </div>
           </div>
         </div>
       </div>
