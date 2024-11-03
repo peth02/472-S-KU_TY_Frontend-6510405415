@@ -119,6 +119,18 @@
   background-color: rgba(138, 153, 168, 0.2);
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.event-delete-button {
+  width: 127px;
+  height: 52px;
+  border: none;
+  border-radius: 4px;
+  background-color: #b6010180;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .number-of-participants-container {
@@ -134,7 +146,7 @@
   margin-left: 10px;
 }
 
-.event-tag{
+.event-tag {
   width: 115;
   height: 23;
   border-radius: 10px;
@@ -152,4 +164,27 @@
   display: -webkit-box; /* สำหรับเบราว์เซอร์ที่รองรับ */
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* จำนวนบรรทัดที่ต้องการแสดง */
+}
+
+.profileNameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profileButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.event-active-status {
+  display: "flex";
+  color: #00c853;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

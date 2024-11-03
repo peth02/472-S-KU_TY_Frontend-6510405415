@@ -1,65 +1,75 @@
 .page {
   background-color: white;
-  width: 100vw;  /* ความกว้างครอบคลุม viewport ทั้งหมด */
+  width: 100vw; /* ความกว้างครอบคลุม viewport ทั้งหมด */
   height: 100vh;
   display: flex;
   flex-direction: column;
   color: black;
 }
 
-.event-detail-container{
+.eventTagRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.event-detail-container {
   margin-top: 120px;
   margin-left: 140px;
   display: flex;
 }
 
-.event-description{
+.event-description {
   margin-left: 140px;
 }
 
-.event-detail-picture{
+.event-detail-picture {
   width: 960px;
   height: 600px;
 }
 
-.event-detail{
+.event-detail {
   margin-left: 70px;
 }
 
-.event-name-text{
+.event-name-text {
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.event-detail-date, .event-detail-location, .event-detail-time, .event-detail-date-location, .event-participants{
+.event-detail-date,
+.event-detail-location,
+.event-detail-time,
+.event-detail-date-location,
+.event-participants {
   display: flex;
 }
 
-.event-detail-date-location{
+.event-detail-date-location {
   margin-bottom: 15px;
 }
 
-.event-detail-location{
+.event-detail-location {
   margin-left: 40px;
 }
 
-.event-detail-time{
+.event-detail-time {
   margin-bottom: 30px;
 }
 
-.event-detail-text{
+.event-detail-text {
   margin-left: 10px;
 }
 
-.event-participants{
+.event-participants {
   margin-bottom: 35px;
 }
 
-.number-of-participants-container{
+.number-of-participants-container {
   background-color: rgba(5, 195, 111, 1);
   width: 87px;
-  height: 43px;
+  height: 40px;
   color: white;
   border-radius: 10px;
   display: flex;
@@ -73,7 +83,7 @@
   padding-right: 7px;
 }
 
-.event-tag{
+.event-tag {
   width: 145px;
   height: 40px;
   padding: 20px 14px 20px 14px;
@@ -88,15 +98,16 @@
   margin-bottom: 35px;
 }
 
-.join-event-button{
+.join-event-button {
   font-size: 32px;
   width: 220px;
   height: 60px;
-  padding:10px 60px 10px 60px ;
+  padding: 10px 60px 10px 60px;
   border: none;
   color: white;
   background-color: rgba(0, 143, 70, 1);
   border-radius: 10px;
   display: flex;
   justify-content: baseline;
+  cursor: pointer;
 }

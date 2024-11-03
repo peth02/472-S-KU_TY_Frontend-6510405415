@@ -7,6 +7,14 @@
   color: black;
 }
 
+.title-page {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-left: 50px;
+}
+
 .text-username {
   font-size: 15px;
   margin-right: 80px;
@@ -152,4 +160,43 @@
   display: -webkit-box; /* สำหรับเบราว์เซอร์ที่รองรับ */
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* จำนวนบรรทัดที่ต้องการแสดง */
+}
+
+.profileHeaderContent {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profileNameRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profileButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 5rem;
+}
+
+.profileGreyButton {
+  border: none;
+  padding: 0.75rem 1rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(138, 153, 168, 0.2);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profileDivider {
+  border: 0;
+  height: 1px;
+  background: #E9E9E9; /* Tailwind's gray-200 */
+  margin: 2rem 3rem;
 }
