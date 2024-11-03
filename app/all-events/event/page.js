@@ -34,13 +34,23 @@ export default function Event() {
     <div>
       <div className={styles["event-detail-container"]}>
         <div className={styles["event-detail-picture"]}>
-          <Image
-            src="/images/default-event-picture.png"
-            layout="responsive"
-            width={100}
-            height={100}
-            alt="Event picture"
-          />
+          {eventDetails && eventDetails["imageUrl"] ? (
+            <Image
+              src={eventDetails["imageUrl"]}
+              layout="responsive"
+              width={100}
+              height={100}
+              alt="Event picture"
+            />
+          ) : (
+            <Image
+              src="/images/default-event-picture.png"
+              layout="responsive"
+              width={100}
+              height={100}
+              alt="Event picture"
+            />
+          )}
         </div>
 
         <div className={styles["event-detail"]}>
