@@ -72,8 +72,8 @@ export default function Event({ params }) {
         eventId: eventId,
         name: eventName,
         description: eventDescription,
-        startDate: null,
-        startTime: null,
+        startDate: eventDate,
+        startTime: startTime,
         location: eventLocation,
         capacity: capacity,
         typeName: typeName,
@@ -261,7 +261,7 @@ export default function Event({ params }) {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="date"
                   placeholder="ระบุวันที่"
                   value={eventDate}
                   onChange={(e) => setEventDate(e.target.value)}
@@ -294,7 +294,7 @@ export default function Event({ params }) {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="time"
                   placeholder="ระบุเวลา"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}

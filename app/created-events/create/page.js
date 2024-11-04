@@ -31,10 +31,10 @@ export default function Event() {
       const newEvent = {
         name: eventName,
         description: eventDescription,
-        startDate: null,
+        startDate: eventDate,
         location: eventLocation,
-        startTime: null,
-        typeName: null,
+        startTime: startTime,
+        typeName: typeName,
         capacity: capacity,
         createdBy: user.userId,
       };
@@ -218,7 +218,7 @@ export default function Event() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="date"
                   placeholder="ระบุวันที่"
                   value={eventDate}
                   onChange={(e) => setEventDate(e.target.value)}
@@ -251,7 +251,7 @@ export default function Event() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="time"
                   placeholder="ระบุเวลา"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
