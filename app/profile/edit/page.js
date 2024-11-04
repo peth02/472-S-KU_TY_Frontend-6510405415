@@ -17,6 +17,7 @@ export default function EditProfile() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
   const userId = user?.userId;
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -24,6 +25,8 @@ export default function EditProfile() {
         .then((data) => {
           setEmail(data.email);
           setDescription(data.description);
+          console.log("User Data:", data);
+          setUserData(data);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -68,27 +71,27 @@ export default function EditProfile() {
           <div className={styles.profileHeaderContent}>
             <div className={styles.profileNameRow}>
               <h1 className={styles.profileName}>
-                {user.firstName} {user.lastName}
+                {userData.firstName} {userData.lastName}
               </h1>
             </div>
             <div className={styles.profileButtonRow}>
               <button className={styles.profileGreyButton}>แก้ไขโปรไฟล์</button>
               <button
                 className={styles.profileGreyButton}
-                onClick={handleEditProfile}
+                onClick={handleSubmit}
               >
                 แก้ไขรายละเอียด
               </button>
             </div>
           </div>
           <p className={styles.profileFaculty}>
-            {user.departmentNameTh} {user.majorName}
+            {userData.departmentNameTh} {userData.majorName}
           </p>
           <h2>อีเมล์</h2>
-          <p>{user.email}</p>
-          <p className={styles.profileEmail}>{user.email}</p>
+          <p>{userData.email}</p>
+          <p className={styles.profileEmail}>{userData.email}</p>
           <h2>รายละเอียด</h2>
-          <p>{user.description}</p>
+          <p>{userData.description}</p>
         </div>
       </div>
       <hr className={styles.profileDivider} />

@@ -28,12 +28,13 @@ export default function CreatedEventItem({ event, onDelete }) {
   
   return (
     <div className={styles["event-container"]}>
-      <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
+      <div style={{ width: "454px", height: "250px", marginBottom: "20px", overflow: "hidden" }}>
         <Image
           src={event.imageUrl || "/images/default-event-picture.png"}
           layout="responsive"
-          width={100} // กำหนดให้เต็มหน้าจอ
-          height={100}
+          width={454}
+          height={250}
+          objectFit="cover"
           alt="Event picture"
         />
       </div>
@@ -44,13 +45,13 @@ export default function CreatedEventItem({ event, onDelete }) {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "green",
+              backgroundColor: event.status === "OPEN" ? "green" : "red",
               borderRadius: "50%",
             }}
           ></div>
           <div>
             <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-            {event.name}
+            {event.name || "Event Name"}
             </p>
           </div>
         </div>
@@ -81,7 +82,7 @@ export default function CreatedEventItem({ event, onDelete }) {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>{event.startTime ? event.startTime : "ไม่ระบุเวลา"}</p>
+          <p className={styles["event-detail-text"]}>{event.startTime ? event.startTime : "ไม่ระบุเวลา"}</p>
           </div>
           <div>
             <Image
@@ -134,7 +135,7 @@ export default function CreatedEventItem({ event, onDelete }) {
                     </div>
                   </div>
                 </div>
-                <div className={styles["event-tag"]}>BOARD GAME</div>
+                <div className={styles["event-tag"]}>{event.typeName || "ไม่มีหมวดหมู่"}</div>
               </div>
 
               <div

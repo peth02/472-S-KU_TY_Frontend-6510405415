@@ -200,7 +200,7 @@ export default function Event({ params }) {
                   <p style={{ fontSize: 22 }}>
                     {eventDetails && eventDetails["attendeeCount"]
                       ? `${eventDetails["attendeeCount"]}`
-                      : "ไม่มีข้อมูล"}
+                      : "-"}
                   </p>
                 </div>
               </div>

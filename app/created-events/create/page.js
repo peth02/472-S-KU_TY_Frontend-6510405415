@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { createEvent, updateEventImage } from "../../apis/eventApi";
-import { fetchUserData } from "../../apis/userApi";
 import { User } from "../../models/user";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "../../UserContext";

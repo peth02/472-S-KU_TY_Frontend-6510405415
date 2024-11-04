@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -69,22 +69,32 @@ export default function Profile() {
       <div className={styles.profileHeader}>
         {/* Profile Avatar */}
         <Image
-            src={userData.imageUrl || "/images/default-profile-picture.png"}
-            alt="Profile Avatar"
-            width={100}
-            height={100}
-            className={styles.avatarImage}
-          />
+          style={{ borderRadius: "100%" }}
+          src={userData.imageUrl || "/images/default-profile-picture.png"}
+          alt="Profile Avatar"
+          className={styles.avatarImage}
+          width={250}
+          height={250}
+          objectFit="cover"
+        />
 
         {/* Profile Info */}
         <div className={styles.profileInfo}>
           <div className={styles.profileHeaderContent}>
             <div className={styles.profileNameRow}>
-              <h1 className={styles.profileName}>{userData.firstName} {userData.lastName}</h1>
+              <h1 className={styles.profileName}>
+                {userData.firstName} {userData.lastName}
+              </h1>
             </div>
             <div className={styles.profileButtonRow}>
-              <button className={styles.profileGreyButton}>แก้ไขโปรไฟล์</button>
-              <button className={styles.profileGreyButton} onClick={handleEditProfile}>แก้ไขรายละเอียด</button>
+              <label htmlFor="imageUpload" className={styles.profileGreyButton}>แก้ไขโปรไฟล์</label>
+              <input type="file" id="imageUpload" style={{ display: "none" }} onChange={handleImageChange} />
+              <button
+                className={styles.profileGreyButton}
+                onClick={handleEditProfile}
+              >
+                แก้ไขรายละเอียด
+              </button>
             </div>
           </div>
           <p className={styles.profileFaculty}>
@@ -98,11 +108,11 @@ export default function Profile() {
         </div>
       </div>
       <hr className={styles.profileDivider} />
-      <form onSubmit={handleImageUpload} className={styles.imageUploadForm}>
-        <label htmlFor="imageUpload">Upload Profile Picture</label>
-        <input type="file" id="imageUpload" onChange={handleImageChange} />
-        <button type="submit" className={styles.uploadButton}>Upload</button>
-      </form>
+      {imageFile ? (
+        <button onClick={handleImageUpload} type="submit" className={styles.uploadButton}>
+          Upload
+        </button>
+      ) : null}
     </div>
   );
 }

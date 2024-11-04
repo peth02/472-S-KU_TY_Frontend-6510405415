@@ -15,22 +15,23 @@ export default function AllEventItem({ event, userId }) {
   return (
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
-        <Image
-          src="/images/default-event-picture.png"
+      <Image
+          src={event.imageUrl || "/images/default-event-picture.png"}
           layout="responsive"
-          width={100} // กำหนดให้เต็มหน้าจอ
-          height={100}
+          width={454}
+          height={250}
+          objectFit="cover"
           alt="Event picture"
         />
       </div>
       <div className={styles["event-info-container"]}>
         <div>
-          <p style={{ fontSize: "24px", fontWeight: "bold" }}>{event.name}</p>
+          <p style={{ fontSize: "24px", fontWeight: "bold" }}>{event.name || "Event Name"}</p>
         </div>
         <div>
           <p style={{ fontSize: "14px", fontWeight: "regular" }}>
             โดย{" "}
-            <span style={{ fontWeight: "bold" }}>หมูเด้ง ช่วยหมูเด้งด้วย</span>
+            <span style={{ fontWeight: "bold" }}>{event.createdBy ? event.createdBy.firstName + ' ' + event.createdBy.lastName : "Anonymous"}</span>
           </p>
         </div>
         <div className={styles["event-detail-container"]}>
@@ -43,7 +44,7 @@ export default function AllEventItem({ event, userId }) {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>2 Nov 2024</p>
+            <p className={styles["event-detail-text"]}>{event.startDate ? event.startDate : "ไม่ระบุวัน"}</p>
           </div>
           <div>
             <Image
@@ -54,7 +55,7 @@ export default function AllEventItem({ event, userId }) {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>09 : 00 น.</p>
+            <p className={styles["event-detail-text"]}>{event.startTime ? event.startTime : "ไม่ระบุเวลา"}</p>
           </div>
           <div>
             <Image
@@ -66,14 +67,13 @@ export default function AllEventItem({ event, userId }) {
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             <p className={styles["event-detail-text"]}>
-              สำนักหอสมุดเกษตรศาสตร์
+            {event.location ? event.location : "ไม่กำหนดสถานที่"}
             </p>
           </div>
         </div>
         <div className={styles["event-description-container"]}>
           <p>
-            หาเพื่อนไปเล่นบอร์ดเกม จอย ๆ กัน ห้องเล่นบอร์ดเกม ที่หอสมุด
-            มาเจอกันนะ..
+          {event.description ? event.description : "ไม่มีคำอธิบายเพิ่มเติม"}
           </p>
         </div>
         <div className={styles["profileIconRow"]}>
@@ -95,10 +95,10 @@ export default function AllEventItem({ event, userId }) {
               />
             </div>
             <div>
-              <p>10</p>
+              <p>{event.attendeeCount ? event.attendeeCount : "-"}</p>
             </div>
           </div>
-          <div className={styles["event-tag"]}>BOARD GAME</div>{" "}
+          <div className={styles["event-tag"]}>{event.typeName || "ไม่มีหมวดหมู่"}</div>{" "}
           <button
             onClick={handleViewDetails}
             className={styles["event-detail-button"]}

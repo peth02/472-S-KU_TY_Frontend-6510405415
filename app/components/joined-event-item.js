@@ -29,11 +29,12 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
   return (
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
-        <Image
-          src="/images/default-event-picture.png"
+      <Image
+          src={event.imageUrl || "/images/default-event-picture.png"}
           layout="responsive"
-          width={100}
-          height={100}
+          width={454}
+          height={250}
+          objectFit="cover"
           alt="Event picture"
         />
       </div>
@@ -48,7 +49,7 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
         </div>
         <div>
           <p style={{ fontSize: "14px", fontWeight: "regular" }}>
-            โดย <span style={{ fontWeight: "bold" }}>John Doe</span>
+            โดย <span style={{ fontWeight: "bold" }}>{event.createdBy ? event.createdBy.firstName + ' ' + event.createdBy.lastName : "Anonymous"}</span>
           </p>
         </div>
         <div className={styles["event-detail-container"]}>
@@ -61,7 +62,7 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>2 Nov 2024</p>
+            <p className={styles["event-detail-text"]}>{event.startDate ? event.startDate : "ไม่ระบุวัน"}</p>
           </div>
           <div>
             <Image
@@ -72,7 +73,7 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
             />
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-            <p className={styles["event-detail-text"]}>09 : 00 น.</p>
+            <p className={styles["event-detail-text"]}>{event.startTime ? event.startTime : "ไม่ระบุเวลา"}</p>
           </div>
           <div>
             <Image
@@ -84,14 +85,13 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
           </div>
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             <p className={styles["event-detail-text"]}>
-              Library of Agriculture
+            {event.location ? event.location : "ไม่กำหนดสถานที่"}
             </p>
           </div>
         </div>
         <div className={styles["event-description-container"]}>
           <p>
-            Looking for friends to play board games together at the library
-            Let's meet up..
+          {event.description ? event.description : "ไม่มีคำอธิบายเพิ่มเติม"}
           </p>
         </div>
         <div
@@ -127,9 +127,9 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
                 />
               </div>
               <div>
-                <p>10</p>
+                <p>{event.attendeeCount ? event.attendeeCount : "-"}</p>
               </div>
-              <div className={styles["event-tag"]}>BOARD GAME</div>
+              <div className={styles["event-tag"]}>{event.typeName || "ไม่มีหมวดหมู่"}</div>
             </div>
           </div>
           <div className={styles.profileButtonRow}>

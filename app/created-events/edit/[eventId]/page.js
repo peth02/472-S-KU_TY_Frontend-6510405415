@@ -3,8 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { fetchEventData, editEvent } from "../../../apis/eventApi";
-import { useRouter } from 'next/navigation';
+import {
+  fetchEventData,
+  editEvent,
+  updateEventImage,
+} from "../../../apis/eventApi";
+import { useRouter } from "next/navigation";
 import { useUserContext } from "../../../UserContext";
 
 export default function Event({ params }) {
@@ -22,13 +26,16 @@ export default function Event({ params }) {
   const [capacity, setCapacity] = useState("");
   const [status, setStatus] = useState("");
   const [error, setError] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [isDefaultImage, setIsDefaultImage] = useState(true);
 
   useEffect(() => {
     params.then((resolvedParams) => {
       setEventId(resolvedParams.eventId);
     });
   }, [params]);
-  
+
   useEffect(() => {
     if (userId && eventId) {
       fetchEventData(eventId)
@@ -42,6 +49,7 @@ export default function Event({ params }) {
           setTypeName(data.typeName || "");
           setCapacity(data.capacity || "");
           setStatus(data.status || "CLOSED");
+          setImagePreviewUrl(data.imageUrl);
           if (data.createdBy.userId !== userId) {
             setError(new Error("You are not authorized to edit this event."));
           }
@@ -54,14 +62,7 @@ export default function Event({ params }) {
   }, [eventId, userId]);
 
   const handleStatusToggle = async () => {
-    try {
-      const newStatus = status === "OPEN" ? "CLOSED" : "OPEN";
-      await updateEventStatus(eventId, newStatus);
-      setStatus(newStatus);
-    } catch (error) {
-      console.error("Error updating event status:", error);
-      setError(error.message);
-    }
+    setStatus(status === "OPEN" ? "CLOSED" : "OPEN");
   };
 
   const handleEditSubmit = async (e) => {
@@ -80,11 +81,46 @@ export default function Event({ params }) {
       };
       console.log("Updating event with data:", updatedEvent);
       await editEvent(updatedEvent);
-      router.push('/created-events');
+      handleImageUpload(e, eventId);
+      router.push("/created-events");
     } catch (error) {
       console.error("Error updating event:", error);
       setError(error.message);
     }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    setImagePreviewUrl(URL.createObjectURL(file));
+    setIsDefaultImage(false);
+    console.log("Image file:", file);
+  };
+
+  const handleImageUpload = async (e, eventId) => {
+    e.preventDefault();
+    if (!imageFile) {
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      const newImageUrl = await updateEventImage(eventId, formData);
+      setUserData((prevData) => ({
+        ...prevData,
+        imageUrl: newImageUrl,
+      }));
+      console.log("New Image URL:", newImageUrl);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError(error.message);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreviewUrl(null);
+    setIsDefaultImage(true);
   };
 
   if (error) {
@@ -94,7 +130,6 @@ export default function Event({ params }) {
   if (!eventDetails) {
     return <div>Loading...</div>;
   }
-
 
   return (
     <div
@@ -125,7 +160,7 @@ export default function Event({ params }) {
             height={32}
             alt="back-logo"
             style={{ cursor: "pointer" }}
-            onClick={() => router.push('/created-events')}
+            onClick={() => router.push("/created-events")}
           />
         </div>
         <div>
@@ -155,22 +190,29 @@ export default function Event({ params }) {
         }}
       >
         <div className={styles["input-wrapper"]}>
-          <input type="file" id="upload" style={{ display: "none" }} />
-          <label htmlFor="upload" className={styles["input-label"]}>
+          <input
+            type="file"
+            id="imageUpload"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+          />
+          <label htmlFor="imageUpload" className={styles["input-label"]}>
             <Image
-              src="/images/add-picture-icon.png"
-              width={270}
-              height={270}
+              src={imagePreviewUrl || "/images/add-picture-icon.png"}
+              width={400}
+              height={400}
               alt="add-picture-logo"
             />
-            <span
-              style={{
-                fontSize: 40,
-                fontWeight: "bold",
-              }}
-            >
-              อัปโหลดรูปภาพ
-            </span>
+            {imagePreviewUrl ? null : (
+              <span
+                style={{
+                  fontSize: 40,
+                  fontWeight: "bold",
+                }}
+              >
+                อัปโหลดรูปภาพ
+              </span>
+            )}
           </label>
         </div>
 
@@ -346,7 +388,10 @@ export default function Event({ params }) {
             </div>
           </div>
 
-          <div className={styles["create-event-input-container"]} style={{display:'flex'}}>
+          <div
+            className={styles["create-event-input-container"]}
+            style={{ display: "flex" }}
+          >
             <div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Image
@@ -381,13 +426,23 @@ export default function Event({ params }) {
                 </p>
               </div>
             </div>
-            <div style={{ marginLeft: 35 }} className={styles['edit-event-button-status']}>
-              <p  className={styles["create-event-text"] }
-                style={{whiteSpace:'nowrap'}}
-              >Status: {status}</p>
-              <button 
-                onClick={handleStatusToggle} 
-                className={`${styles['status-button']} ${status === "OPEN" ? styles['status-open'] : styles['status-close']}`}
+            <div
+              style={{ marginLeft: 35 }}
+              className={styles["edit-event-button-status"]}
+            >
+              <p
+                className={styles["create-event-text"]}
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Status: {status}
+              </p>
+              <button
+                onClick={handleStatusToggle}
+                className={`${styles["status-button"]} ${
+                  status !== "OPEN"
+                    ? styles["status-open"]
+                    : styles["status-close"]
+                }`}
               >
                 {status === "OPEN" ? "Close Event" : "Open Event"}
               </button>
@@ -409,8 +464,16 @@ export default function Event({ params }) {
               />
             </div>
           </div>
-
-          <div>
+          <div className={styles.buttonContainer}>
+            {!isDefaultImage && (
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                className={styles.removeButton}
+              >
+                ลบรูปภาพ
+              </button>
+            )}
             <button
               className={styles["create-event-button"]}
               onClick={handleEditSubmit}

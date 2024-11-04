@@ -180,3 +180,28 @@
 .status-close {
   background-color: rgba(220, 53, 69, 1); /* สีแดง */
 }
+
+.removeButton {
+
+  font-size: 24px;
+  width: 280px;
+  height: 60px;
+  border: none;
+  color: white;
+  background-color: #ff4d4d;
+  border-radius: 10px;
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background-color: #ff1a1a;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
