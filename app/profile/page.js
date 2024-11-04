@@ -19,7 +19,6 @@ export default function Profile() {
       fetchUserData(user.userId)
         .then((data) => {
           setUserData(data);
-          console.log("fetch imageurl:", user?.imageUrl);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);

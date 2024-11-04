@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { createEvent } from "../../apis/eventApi";
-import { fetchUserByUsername } from "../../apis/userApi";
+import { createEvent, updateEventImage } from "../../apis/eventApi";
+import { fetchUserData } from "../../apis/userApi";
 import { User } from "../../models/user";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useUserContext } from "../../UserContext";
 
 export default function Event() {
@@ -19,6 +19,10 @@ export default function Event() {
   const [typeName, setTypeName] = useState("");
   const [capacity, setCapacity] = useState("");
   const [error, setError] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [eventData, setEventData] = useState(null);
+  const [isDefaultImage, setIsDefaultImage] = useState(true);
   const router = useRouter();
   const { user } = useUserContext();
 
@@ -36,7 +40,7 @@ export default function Event() {
         createdBy: user.userId,
       };
       console.log("Creating event with data:", newEvent);
-      await createEvent(newEvent);
+      handleImageUpload(e, (await createEvent(newEvent)).eventId);
       // Clear the form after successful submission
       setEventName("");
       setEventDescription("");
@@ -45,11 +49,44 @@ export default function Event() {
       setStartTime("");
       setTypeName("");
       setCapacity("");
-      router.push('/created-events');
+      router.push("/created-events");
     } catch (error) {
       console.error("Error creating event:", error);
       setError(error.message);
     }
+  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    setImagePreviewUrl(URL.createObjectURL(file));
+    setIsDefaultImage(false);
+    console.log("Image file:", file);
+  };
+
+  const handleImageUpload = async (e, eventId) => {
+    e.preventDefault();
+    if (!imageFile) {
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      const newImageUrl = await updateEventImage(eventId, formData);
+      setUserData((prevData) => ({
+        ...prevData,
+        imageUrl: newImageUrl,
+      }));
+      console.log("New Image URL:", newImageUrl);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError(error.message);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreviewUrl(null);
+    setIsDefaultImage(true);
   };
 
   return (
@@ -81,7 +118,7 @@ export default function Event() {
             height={32}
             alt="back-logo"
             style={{ cursor: "pointer" }}
-            onClick={() => router.push('/created-events')}
+            onClick={() => router.push("/created-events")}
           />
         </div>
         <div>
@@ -111,22 +148,29 @@ export default function Event() {
         }}
       >
         <div className={styles["input-wrapper"]}>
-          <input type="file" id="upload" style={{ display: "none" }} />
-          <label htmlFor="upload" className={styles["input-label"]}>
+          <input
+            type="file"
+            id="imageUpload"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+          />
+          <label htmlFor="imageUpload" className={styles["input-label"]}>
             <Image
-              src="/images/add-picture-icon.png"
-              width={270}
-              height={270}
+              src={imagePreviewUrl || "/images/add-picture-icon.png"}
+              width={400}
+              height={400}
               alt="add-picture-logo"
             />
-            <span
-              style={{
-                fontSize: 40,
-                fontWeight: "bold",
-              }}
-            >
-              อัปโหลดรูปภาพ
-            </span>
+            {imagePreviewUrl ? null : (
+              <span
+                style={{
+                  fontSize: 40,
+                  fontWeight: "bold",
+                }}
+              >
+                อัปโหลดรูปภาพ
+              </span>
+            )}
           </label>
         </div>
 
@@ -356,7 +400,18 @@ export default function Event() {
           </div>
 
           <div>
+          <div className={styles.buttonContainer}>
+            {!isDefaultImage && (
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                className={styles.removeButton}
+              >
+                ลบรูปภาพ
+              </button>
+            )}
             <button
+              type="submit"
               className={styles["create-event-button"]}
               onClick={handleSubmit}
             >
@@ -364,7 +419,9 @@ export default function Event() {
             </button>
           </div>
         </div>
+        {error && <p>{error}</p>}
+          </div>
+        </div>
       </div>
-    </div>
   );
 }

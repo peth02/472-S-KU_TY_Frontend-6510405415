@@ -30,7 +30,7 @@ export default function CreatedEventItem({ event, onDelete }) {
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
         <Image
-          src="/images/default-event-picture.png"
+          src={event.imageUrl || "/images/default-event-picture.png"}
           layout="responsive"
           width={100} // กำหนดให้เต็มหน้าจอ
           height={100}

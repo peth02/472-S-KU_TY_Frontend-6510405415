@@ -94,3 +94,20 @@ export const deleteEvent = async (eventId) => {
       throw error;
     }
   };
+  export const updateEventImage = async (eventId, formData) => {
+    try {
+      const response = await axios.put(`${API_BASE_URL}/event/${eventId}/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response.data.code === 'OK') {
+        return response.data.data.imageUrl; // Return the new imageUrl
+      } else {
+        throw new Error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error updating event image:', error);
+      throw error;
+    }
+  };

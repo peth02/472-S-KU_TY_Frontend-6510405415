@@ -101,7 +101,9 @@
   justify-content: center;
   cursor: pointer;
 }
-
+.create-event-button:hover {
+  background-color: rgb(0, 122, 59);
+}
 
 .input-wrapper {
   display: flex;
@@ -155,4 +157,28 @@
 
 .create-event-input-event-description{
   height: 154px;
+}
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.removeButton {
+
+  font-size: 24px;
+  width: 280px;
+  height: 60px;
+  border: none;
+  color: white;
+  background-color: #ff4d4d;
+  border-radius: 10px;
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background-color: #ff1a1a;
 }
