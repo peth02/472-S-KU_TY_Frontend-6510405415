@@ -60,7 +60,7 @@ export default function Profile() {
     return <div>Error loading user data: {error.message}</div>;
   }
 
-  if (!user) {
+  if (!userData) {
     return <div>Loading...</div>;
   }
 
@@ -70,7 +70,7 @@ export default function Profile() {
       <div className={styles.profileHeader}>
         {/* Profile Avatar */}
         <Image
-            src={user.imageUrl || "/images/default-profile-picture.png"}
+            src={userData.imageUrl || "/images/default-profile-picture.png"}
             alt="Profile Avatar"
             width={100}
             height={100}
@@ -81,7 +81,7 @@ export default function Profile() {
         <div className={styles.profileInfo}>
           <div className={styles.profileHeaderContent}>
             <div className={styles.profileNameRow}>
-              <h1 className={styles.profileName}>{user.firstName} {user.lastName}</h1>
+              <h1 className={styles.profileName}>{userData.firstName} {userData.lastName}</h1>
             </div>
             <div className={styles.profileButtonRow}>
               <button className={styles.profileGreyButton}>แก้ไขโปรไฟล์</button>
@@ -89,13 +89,13 @@ export default function Profile() {
             </div>
           </div>
           <p className={styles.profileFaculty}>
-            {user.departmentNameTh} {user.majorName}
+            {userData.departmentNameTh} {userData.majorName}
           </p>
           <h2>อีเมล์</h2>
-          <p>{user.email}</p>
-          <p className={styles.profileEmail}>{user.email}</p>
+          <p>{userData.email}</p>
+          <p className={styles.profileEmail}>{userData.email}</p>
           <h2>รายละเอียด</h2>
-          <p>{user.description}</p>
+          <p>{userData.description}</p>
         </div>
       </div>
       <hr className={styles.profileDivider} />
