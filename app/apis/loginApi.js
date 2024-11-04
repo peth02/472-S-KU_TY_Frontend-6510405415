@@ -11,7 +11,11 @@ export const login = async (loginData) => {
       throw new Error(response.data.message);
     }
   } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
+    if (error.response && error.response.status === 401) {
+      throw new Error("Username หรือ Password ไม่ถูกต้อง");
+    } else {
+      console.error('Error logging in:', error.response?.data || error.message);
+      throw new Error(error.response?.data?.message || error.message);
+    }
   }
 };

@@ -1,6 +1,6 @@
 .page {
   background-color: white;
-  width: 100vw;  /* ความกว้างครอบคลุม viewport ทั้งหมด */
+  width: 100vw; /* ความกว้างครอบคลุม viewport ทั้งหมด */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,14 +8,13 @@
 }
 
 .header-text-kuty {
-  font-weight: bold;   /* ใช้ font-weight สำหรับความหนาของตัวอักษร */
+  font-weight: bold; /* ใช้ font-weight สำหรับความหนาของตัวอักษร */
   font-size: 30px;
   margin-bottom: 10px;
-     /* กำหนดขนาดตัวอักษร */
+  /* กำหนดขนาดตัวอักษร */
 }
 
-
-.header-container{
+.header-container {
   padding-left: 40px;
   padding-right: 40px;
   display: flex;
@@ -25,30 +24,34 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.header-logo-text{
+.header-logo-text {
   display: flex;
 }
 
-.menu-item{
+.menu-item-button {
   font-size: 18px;
-  font-weight: medium;
+  font-weight: 500; /* ใช้ 500 แทน medium */
   margin-left: 23px;
   margin-right: 23px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   list-style-type: none;
 }
 
-.container{
+.container {
   display: flex;
+  cursor: pointer;
 }
 
-.text-username{
+.text-username {
   font-size: 15px;
   margin-right: 80px;
   margin-left: 15px;
 }
 
-
-.logout-button{
+.logout-button {
   width: 44px;
   height: 44px;
   border: none;
@@ -57,6 +60,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(234, 234, 234, 1);
+  cursor: pointer;
 }
 
 .login-button-header {
@@ -70,13 +74,13 @@
   border: none;
 }
 
-.login-container{
+.login-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login-logo-text{
+.login-logo-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,7 +94,7 @@
   margin-right: 200px;
 }
 
-.input-login{
+.input-login {
   background-color: white;
   width: 485px;
   height: 56px;
@@ -107,16 +111,16 @@
   width: 483px;
   height: 80px;
   border-radius: 16px;
-  display: flex;               /* ใช้ flexbox */
-  justify-content: center;     /* จัดแนวนอน */
-  align-items: center;         /* จัดแนวตั้ง */
-  font-size: 22px;            /* ขนาดตัวอักษร (ตามต้องการ) */
+  display: flex; /* ใช้ flexbox */
+  justify-content: center; /* จัดแนวนอน */
+  align-items: center; /* จัดแนวตั้ง */
+  font-size: 22px; /* ขนาดตัวอักษร (ตามต้องการ) */
+  cursor: pointer;
 }
 
-.input-login-container{
+.input-login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-

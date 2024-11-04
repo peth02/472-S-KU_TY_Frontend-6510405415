@@ -1,33 +1,80 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from 'next/navigation';
 import Image from "next/image";
 import styles from "./page.module.css";
-import { fetchEventData } from "../../apis/eventApi";
+import { fetchEventData, fetchAllJoinedUsers } from "../../../apis/eventApi";
+import { joinEvent } from "../../../apis/userApi";
+import { useRouter } from "next/navigation";
+import { useUserContext } from "../../../UserContext";
 
-export default function Event() {
-  const searchParams = useSearchParams();
-  const eventId = searchParams.get('eventId');
+export default function Event({ params }) {
+  const { user } = useUserContext();
+  const router = useRouter();
+  const userId = user?.userId;
+  const [eventId, setEventId] = useState(null);
   const [eventDetails, setEventDetails] = useState(null);
   const [error, setError] = useState(null);
+  const [hasJoined, setHasJoined] = useState(false);
+  const [isCreator, setIsCreator] = useState(false);
 
   useEffect(() => {
-    console.log("Event ID:", eventId);
-    if (eventId) {
-      console.log("Fetching event details for event ID:", eventId);
-      fetchEventData(eventId)
-        .then((data) => {
-          console.log(data);
-          setEventDetails(data);
-          console.log("Event details loaded successfully");
+    params.then((resolvedParams) => {
+      setEventId(resolvedParams.eventId);
+    });
+  }, [params]);
+
+  useEffect(() => {
+    if (userId && eventId) {
+      console.log("Event ID:", eventId);
+      console.log("User ID:", userId);
+
+      fetchAllJoinedUsers(eventId)
+        .then((joinedUsers) => {
+          console.log("Joined Users:", joinedUsers);
+          const userHasJoined = joinedUsers.some(
+            (user) => user.userId === userId
+          );
+          setHasJoined(userHasJoined);
+          console.log("User has joined:", userHasJoined);
         })
         .catch((error) => {
-          console.error(error);
+          console.error("Error fetching joined users:", error);
+          setError(error);
+        });
+
+      fetchEventData(eventId)
+        .then((data) => {
+          console.log("Event Data:", data);
+          setEventDetails(data);
+          if (data.createdBy.userId === userId) {
+            setIsCreator(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching event data:", error);
           setError(error);
         });
     }
-  }, [eventId]);
+  }, [userId, eventId]);
+
+  const handleNavigateToParticipants = () => {
+    router.push(`/joined-events/participants/${eventId}`);
+  };
+
+  const handleBackToJoinedEventsPage = () => {
+    router.push(`/joined-events`);
+  };
+
+  const handleJoinEvent = async () => {
+    try {
+      const message = await joinEvent({ eventId, userId });
+      setHasJoined(true); // Update the state to indicate the user has joined
+      router.push("/joined-events");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   if (error) {
     return <div>Error loading event details: {error.message}</div>;
@@ -40,6 +87,14 @@ export default function Event() {
   return (
     <div>
       <div className={styles["event-detail-container"]}>
+        <button onClick={handleBackToJoinedEventsPage} className={styles.backButton}>
+          <Image
+            src="/images/back-icon.png"
+            alt="Back"
+            width={24}
+            height={32}
+          />
+        </button>
         <div className={styles["event-detail-picture"]}>
           {eventDetails && eventDetails["imageUrl"] ? (
             <Image
@@ -127,7 +182,11 @@ export default function Event() {
           </div>
           <div className={styles["eventTagRow"]}>
             <div className={styles["event-tag"]}>Board Game</div>
-            <div className={styles["event-participants"]}>
+            <div
+              className={styles["event-participants"]}
+              onClick={handleNavigateToParticipants}
+              style={{ cursor: "pointer" }}
+            >
               <div className={styles["number-of-participants-container"]}>
                 <div>
                   <Image
@@ -148,7 +207,17 @@ export default function Event() {
             </div>
           </div>
           <div>
-            <button className={styles["join-event-button"]}>เข้าร่วม</button>
+            <button
+              onClick={handleJoinEvent}
+              className={styles["join-event-button"]}
+              style={{
+                backgroundColor: hasJoined || isCreator ? "gray" : "#008f46",
+                cursor: hasJoined || isCreator ? "not-allowed" : "pointer",
+              }}
+              disabled={hasJoined || isCreator}
+            >
+              {hasJoined || isCreator ? "เข้าร่วมแล้ว" : "เข้าร่วม"}
+            </button>
           </div>
         </div>
       </div>

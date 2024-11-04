@@ -89,16 +89,16 @@
 }
 
 .create-event-button{
-  font-size: 32px;
-  width: 220px;
+  font-size: 24px;
+  width: 280px;
   height: 60px;
-  padding:10px 60px 10px 60px ;
   border: none;
   color: white;
   background-color: rgba(0, 143, 70, 1);
   border-radius: 10px;
   display: flex;
-  justify-content: baseline;
+  padding: 15px;
+  justify-content: center;
   cursor: pointer;
 }
 

@@ -8,6 +8,7 @@ import { createEvent } from "../../apis/eventApi";
 import { fetchUserByUsername } from "../../apis/userApi";
 import { User } from "../../models/user";
 import { useRouter } from 'next/navigation';
+import { useUserContext } from "../../UserContext";
 
 export default function Event() {
   const [eventName, setEventName] = useState("");
@@ -19,6 +20,7 @@ export default function Event() {
   const [capacity, setCapacity] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
+  const { user } = useUserContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ export default function Event() {
         startTime: null,
         typeName: null,
         capacity: capacity,
-        createdBy: (await fetchUserByUsername("b6510405491")).userId
+        createdBy: user.userId,
       };
       console.log("Creating event with data:", newEvent);
       await createEvent(newEvent);
@@ -73,15 +75,14 @@ export default function Event() {
             marginLeft: 24,
           }}
         >
-          <Link href="/created-events">
-            <Image
-              src="/images/back-icon.png"
-              width={17}
-              height={32}
-              alt="back-logo"
-              style={{ cursor: "pointer" }}
-            />
-          </Link>
+          <Image
+            src="/images/back-icon.png"
+            width={17}
+            height={32}
+            alt="back-logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => router.push('/created-events')}
+          />
         </div>
         <div>
           <p
@@ -359,7 +360,7 @@ export default function Event() {
               className={styles["create-event-button"]}
               onClick={handleSubmit}
             >
-              เข้าร่วม
+              สร้างกิจกรรม
             </button>
           </div>
         </div>

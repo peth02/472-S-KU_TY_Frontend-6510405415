@@ -5,9 +5,15 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { deleteEvent } from '../apis/eventApi';
+import { useRouter } from 'next/navigation'
 
 export default function CreatedEventItem({ event, onDelete }) {
   const [error, setError] = useState(null);
+  const router = useRouter();
+
+  const handleEditDetails = () => {
+    router.push(`/created-events/edit/${event.eventId}`);
+  };
 
   const handleDelete = async () => {
     try {
@@ -158,7 +164,7 @@ export default function CreatedEventItem({ event, onDelete }) {
                 }}
               >
                 <div>
-                  <button className={styles["edit-event-button"]}>แก้ไข</button>
+                  <button onClick={handleEditDetails} className={styles["edit-event-button"]}>แก้ไข</button>
                 </div>
                 <div>
                   <button onClick={handleDelete} className={styles["delete-event-button"]}>ลบ</button>

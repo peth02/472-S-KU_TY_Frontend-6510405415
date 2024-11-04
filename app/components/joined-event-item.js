@@ -5,9 +5,15 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { quitEvent } from "../apis/userApi";
+import { useRouter } from 'next/navigation'
 
 export default function JoinedEventItem({ event, userId, onQuit }) {
   const [error, setError] = useState(null);
+  const router = useRouter();
+
+  const handleViewDetails = () => {
+    router.push(`/joined-events/detail/${event.eventId}`);
+  };
 
   const handleQuit = async () => {
     try {
@@ -128,7 +134,7 @@ export default function JoinedEventItem({ event, userId, onQuit }) {
           </div>
           <div className={styles.profileButtonRow}>
             <div>
-              <button className={styles["event-detail-button"]}>
+              <button onClick={handleViewDetails} className={styles["event-detail-button"]}>
                 รายละเอียด
               </button>
             </div>

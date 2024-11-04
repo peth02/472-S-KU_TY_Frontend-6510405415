@@ -3,8 +3,15 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
-export default function AllEventItem({ event }) {
+export default function AllEventItem({ event, userId }) {
+  const router = useRouter();
+
+  const handleViewDetails = () => {
+    router.push(`/all-events/detail/${event.eventId}`);
+  };
+
   return (
     <div className={styles["event-container"]}>
       <div style={{ width: "454px", height: "250px", marginBottom: "20px" }}>
@@ -107,13 +114,13 @@ export default function AllEventItem({ event }) {
               <div className={styles["event-tag"]}>BOARD GAME</div>
             </div>
           </div>
-          <Link href={`/all-events/event?eventId=${event.eventId}`}>
+          
             <div>
-              <button className={styles["event-detail-button"]}>
+              <button onClick={handleViewDetails} className={styles["event-detail-button"]}>
                 รายละเอียด
               </button>
             </div>
-          </Link>
+          
         </div>
       </div>
     </div>

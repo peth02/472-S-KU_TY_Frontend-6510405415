@@ -4,21 +4,28 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import JoinedEventItem from "../components/joined-event-item";
 import { fetchAllJoinedEvents } from "../apis/userApi";
+import { useUserContext } from "../UserContext";
 
-export default function JoinedEvents() {
+export default function CreatedEvents() {
+  const { user } = useUserContext();
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const userId = user?.userId;
 
   useEffect(() => {
-    const userId = "a74461c6-4847-4704-b333-31bb951d270b"; // Replace with dynamic user ID if needed
     fetchAllJoinedEvents(userId)
       .then((data) => {
-        console.log(data);
-        setEvents(data);
+        const joinedEvents = data.filter(event => event.createdBy.userId !== userId);
+        console.log(joinedEvents);
+        setEvents(joinedEvents);
       })
       .catch((error) => {
         console.error(error);
         setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -26,12 +33,12 @@ export default function JoinedEvents() {
     setEvents(events.filter((event) => event.eventId !== eventId));
   };
 
-  if (error) {
-    return <div>Error loading joined events: {error.message}</div>;
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  if (events.length === 0) {
-    return <div>Loading...</div>;
+  if (error) {
+    return <div>Error loading events: {error.message}</div>;
   }
   return (
     <div>
@@ -46,20 +53,14 @@ export default function JoinedEvents() {
       <div className={styles["content-container"]}>
         
         <div className={styles["events-container"]}>
-        {events.map((event) => (
+        {events.length === 0 ? (<div>No events available.</div>) : (events.map((event) => (
             <JoinedEventItem
-              key={event.eventId}
-              userId="a74461c6-4847-4704-b333-31bb951d270b"
-              event={event}
-              onQuit={handleQuit}
-            />
-          ))}
-          <JoinedEventItem />
-          <JoinedEventItem />
-          <JoinedEventItem />
-          <JoinedEventItem />
-          <JoinedEventItem />
-          <JoinedEventItem />
+            key={event.eventId}
+            userId={user?.userId}
+            event={event}
+            onQuit={handleQuit}
+          />
+          )))}
         </div>
       </div>
     </div>

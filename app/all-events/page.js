@@ -6,8 +6,10 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import AllEventItem from "../components/all-event-item";
 import { fetchAllEvents } from "../apis/eventApi";
+import { useUserContext } from "../UserContext";
 
 export default function AllEvent() {
+  const { user } = useUserContext();
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
 
@@ -88,7 +90,7 @@ export default function AllEvent() {
 
         <div className={styles["events-container"]}>
           {events.map((event) => (
-            <AllEventItem key={event.eventId} event={event} />
+            <AllEventItem key={event.eventId} event={event} userId={user?.userId}/>
           ))}
         </div>
       </div>

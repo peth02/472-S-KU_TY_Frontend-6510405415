@@ -5,19 +5,21 @@ import { fetchAllCreatedEvents } from "../apis/userApi";
 import styles from "./page.module.css";
 import CreatedEventItem from "../components/created-event-item";
 import { useRouter } from 'next/navigation';
+import { useUserContext } from "../UserContext";
 
 export default function CreatedEvents() {
+  const { user } = useUserContext();
   const navigateToCreateEvent = () => {
-    window.location.href = "/created-events/event";
+    router.push("/created-events/create");
   };
 
   const router = useRouter();
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userId = "a74461c6-4847-4704-b333-31bb951d270b"; // Replace with dynamic event ID if needed
-    fetchAllCreatedEvents(userId)
+    fetchAllCreatedEvents(user?.userId)
       .then((data) => {
         console.log(data);
         setEvents(data);
@@ -25,6 +27,9 @@ export default function CreatedEvents() {
       .catch((error) => {
         console.error(error);
         setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -32,12 +37,12 @@ export default function CreatedEvents() {
     setEvents(events.filter((event) => event.eventId !== eventId));
   };
 
-  if (error) {
-    return <div>Error loading created events: {error.message}</div>;
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  if (events.length === 0) {
-    return <div>Loading...</div>;
+  if (error) {
+    return <div>Error loading events: {error.message}</div>;
   }
 
   return (
@@ -56,13 +61,13 @@ export default function CreatedEvents() {
       <hr className={styles.profileDivider} />
       <div className={styles["content-container"]}>
         <div className={styles["events-container"]}>
-          {events.map((event) => (
+          {events.length === 0 ? (<div>No events available.</div>) : (events.map((event) => (
             <CreatedEventItem
               key={event.eventId}
               event={event}
               onDelete={handleDelete}
             />
-          ))}
+          )))}
         </div>
       </div>
     </div>

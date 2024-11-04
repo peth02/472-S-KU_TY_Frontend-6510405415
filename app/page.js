@@ -2,18 +2,40 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { login } from "./action";
-import { useFromState } from "react-dom";
+import { login } from "./apis/loginApi";
+import { useUserContext } from "./UserContext";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
+  const { user, login: loginUser } = useUserContext();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("username", username);
+      console.log("password", password);
+      const userData = await login({ username, password });
+      loginUser(userData);
+      console.log(userData);
+      router.push("/all-events");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className={styles.page}>
       <div className={styles["login-container"]}>
         <div className={styles["login-logo-text"]}>
           <Image
-            src="/images/tree-logo.png"
-            width={378} // กำหนดความกว้าง
+            src="/images/tree-logo.svg"
+            width={378}
             height={378}
             alt="Tree logo"
           />
@@ -39,84 +61,94 @@ export default function Home() {
           >
             เข้าสู่ระบบ
           </p>
-          <div>
-            <p
-              style={{
-                fontSize: "16px",
-                fontweight: "regular",
-                marginBottom: "10px",
-                color: "rgba(86, 86, 86, 1)",
-              }}
-            >
-              บัญชีนนทรี
-            </p>
-            <input
-              className={styles["input-login"]}
-              placeholder="Input Field"
-            />
-            <p
-              style={{
-                marginBottom: "30px",
-                color: "rgba(238, 29, 82, 1)",
-                fontsize: "14px",
-                height: "14px",
-              }}
-            >
-              error
-            </p>
-          </div>
-
-          <div>
-            <p
-              style={{
-                fontSize: "16px",
-                fontweight: "regular",
-                marginBottom: "10px",
-                color: "rgba(86, 86, 86, 1)",
-              }}
-            >
-              รหัสผ่าน
-            </p>
-            <input
-              className={styles["input-login"]}
-              placeholder="Input Password"
-            />
-            <p
-              style={{
-                marginBottom: "70px",
-                color: "rgba(238, 29, 82, 1)",
-                fontsize: "14px",
-                height: "14px",
-              }}
-            >
-              error
-            </p>
-          </div>
-
-          <div>
-            <div
-              style={{
-                marginBottom: "70px",
-                fontSize: "16px",
-                display: "flex",
-                alignItems: "left",
-              }}
-            >
-              <input type="checkbox" id="rememberMe" />
-              <label htmlFor="rememberMe" style={{ marginLeft: "8px" }}>
-                Remember Me
-              </label>
+          <form>
+            <div>
+              <p
+                style={{
+                  fontSize: "16px",
+                  fontweight: "regular",
+                  marginBottom: "10px",
+                  color: "rgba(86, 86, 86, 1)",
+                }}
+              >
+                บัญชีนนทรี
+              </p>
+              <input
+                className={styles["input-login"]}
+                placeholder="Input Field"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <p
+                style={{
+                  marginBottom: "30px",
+                  color: "rgba(238, 29, 82, 1)",
+                  fontsize: "14px",
+                  height: "14px",
+                }}
+              >
+                error
+              </p>
             </div>
-          </div>
 
-          <div>
-            <button
-              className={styles["login-button-main"]}
-              onClick={login}
-            >
-              เข้าสู่ระบบ
-            </button>
-          </div>
+            <div>
+              <p
+                style={{
+                  fontSize: "16px",
+                  fontweight: "regular",
+                  marginBottom: "10px",
+                  color: "rgba(86, 86, 86, 1)",
+                }}
+              >
+                รหัสผ่าน
+              </p>
+              <input
+                className={styles["input-login"]}
+                placeholder="Input Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <p
+                style={{
+                  marginBottom: "70px",
+                  color: "rgba(238, 29, 82, 1)",
+                  fontsize: "14px",
+                  height: "14px",
+                }}
+              >
+                error
+              </p>
+            </div>
+
+            <div>
+              <div
+                style={{
+                  marginBottom: "70px",
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "left",
+                }}
+              >
+                <input type="checkbox" id="rememberMe" />
+                <label htmlFor="rememberMe" style={{ marginLeft: "8px" }}>
+                  Remember Me
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <button
+                className={styles["login-button-main"]}
+                type="button"
+                onClick={handleSubmit}
+              >
+                เข้าสู่ระบบ
+              </button>
+            </div>
+            {error && <p className={styles.error}>{error}</p>}
+          </form>
         </div>
       </div>
       <footer></footer>
