@@ -18,8 +18,6 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("username", username);
-      console.log("password", password);
       const userData = await login({ username, password });
       loginUser(userData);
       console.log(userData);
@@ -106,6 +104,7 @@ export default function Home() {
               <input
                 className={styles["input-login"]}
                 placeholder="Input Password"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

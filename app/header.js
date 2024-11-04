@@ -70,7 +70,7 @@ export default function Header() {
             justifyContent: "center",
           }}
         >
-          <p className={styles["text-username"]}>{user.firstName} {user.lastName}</p>
+          <p onClick={() => router.push('/profile')} className={styles["text-username"]}>{user.firstName} {user.lastName}</p>
         </div>
         <div
           style={{

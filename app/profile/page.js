@@ -1,37 +1,109 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { fetchUserData, updateUserImage } from "../apis/userApi";
+import { useUserContext } from "../UserContext";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
+  const { user } = useUserContext();
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      fetchUserData(user.userId)
+        .then((data) => {
+          setUserData(data);
+          console.log("fetch imageurl:", user?.imageUrl);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          setError(error);
+        });
+    }
+  }, [user]);
+
+  const handleEditProfile = () => {
+    router.push("/profile/edit");
+  };
+
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]);
+  };
+
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    if (!imageFile) {
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      const newImageUrl = await updateUserImage(user.userId, formData);
+      setUserData((prevData) => ({
+        ...prevData,
+        imageUrl: newImageUrl,
+      }));
+      console.log("New Image URL:", newImageUrl);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError(error.message);
+    }
+  };
+
+  if (error) {
+    return <div>Error loading user data: {error.message}</div>;
+  }
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.profileContainer}>
       {/* Profile Header */}
       <div className={styles.profileHeader}>
         {/* Profile Avatar */}
-        <div className={styles.profileAvatar}>
-          <span className={styles.avatarText}>S</span>
-        </div>
+        <Image
+            src={user.imageUrl || "/images/default-profile-picture.png"}
+            alt="Profile Avatar"
+            width={100}
+            height={100}
+            className={styles.avatarImage}
+          />
 
         {/* Profile Info */}
         <div className={styles.profileInfo}>
           <div className={styles.profileHeaderContent}>
             <div className={styles.profileNameRow}>
-              <h1 className={styles.profileName}>Somchai Marison</h1>
+              <h1 className={styles.profileName}>{user.firstName} {user.lastName}</h1>
             </div>
             <div className={styles.profileButtonRow}>
               <button className={styles.profileGreyButton}>แก้ไขโปรไฟล์</button>
-              <button className={styles.profileGreyButton}>
-                แก้ไขรายละเอียด
-              </button>
+              <button className={styles.profileGreyButton} onClick={handleEditProfile}>แก้ไขรายละเอียด</button>
             </div>
           </div>
           <p className={styles.profileFaculty}>
-            คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์ ปี 1
+            {user.departmentNameTh} {user.majorName}
           </p>
-          <p className={styles.profileEmail}>somchai@gmail.com</p>
-          <p className={styles.profileDetails}>@somchaiMS</p>
+          <h2>อีเมล์</h2>
+          <p>{user.email}</p>
+          <p className={styles.profileEmail}>{user.email}</p>
+          <h2>รายละเอียด</h2>
+          <p>{user.description}</p>
         </div>
       </div>
       <hr className={styles.profileDivider} />
+      <form onSubmit={handleImageUpload} className={styles.imageUploadForm}>
+        <label htmlFor="imageUpload">Upload Profile Picture</label>
+        <input type="file" id="imageUpload" onChange={handleImageChange} />
+        <button type="submit" className={styles.uploadButton}>Upload</button>
+      </form>
     </div>
   );
 }

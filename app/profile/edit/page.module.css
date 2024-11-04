@@ -1,0 +1,110 @@
+.page {
+    background-color: white;
+    width: 100vw;  /* ความกว้างครอบคลุม viewport ทั้งหมด */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+  
+  .profileContainer {
+    width: 100%;
+    min-height: 100vh;
+    background-color: white;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+  
+  .profileHeader {
+    display: flex;
+    /* align-items: center; */
+    gap: 5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profileAvatar {
+    width: 16rem;
+    height: 16rem;
+    background-color: #0074AB; /* Tailwind's blue-600 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatarText {
+    color: white;
+    font-size: 7rem; /* Tailwind's text-4xl */
+    font-weight: bold;
+  }
+  
+  .profileInfo {
+    flex: 1;
+  }
+
+  .profileHeaderContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .profileNameRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .profileButtonRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .profileName {
+    padding-top: 2rem;
+    font-size: 2.5rem; /* Tailwind's text-2xl */
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .profileFaculty {
+    color: #00672E; /* Tailwind's green-700 */
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .profileEmail {
+    color: #000000; /* Tailwind's green-700 */
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .profileDetail {
+    color: #000000; /* Tailwind's green-700 */
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .profileGreyButton {
+    border: none;
+    padding: 0.75rem 1rem;
+    margin-left: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(138, 153, 168, 0.2);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .profileDivider {
+    border: 0;
+    height: 1px;
+    background: #E9E9E9; /* Tailwind's gray-200 */
+    margin: 2rem 0;
+  }
+
+  

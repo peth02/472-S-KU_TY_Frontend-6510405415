@@ -20,6 +20,7 @@ export default function Event({ params }) {
   const [startTime, setStartTime] = useState("");
   const [typeName, setTypeName] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [status, setStatus] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Event({ params }) {
           setStartTime(data.startTime || "");
           setTypeName(data.typeName || "");
           setCapacity(data.capacity || "");
+          setStatus(data.status || "CLOSED");
           if (data.createdBy.userId !== userId) {
             setError(new Error("You are not authorized to edit this event."));
           }
@@ -50,6 +52,17 @@ export default function Event({ params }) {
         });
     }
   }, [eventId, userId]);
+
+  const handleStatusToggle = async () => {
+    try {
+      const newStatus = status === "OPEN" ? "CLOSED" : "OPEN";
+      await updateEventStatus(eventId, newStatus);
+      setStatus(newStatus);
+    } catch (error) {
+      console.error("Error updating event status:", error);
+      setError(error.message);
+    }
+  };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +76,7 @@ export default function Event({ params }) {
         location: eventLocation,
         capacity: capacity,
         typeName: typeName,
-        status: "OPEN",
+        status: status,
       };
       console.log("Updating event with data:", updatedEvent);
       await editEvent(updatedEvent);
@@ -368,6 +381,10 @@ export default function Event({ params }) {
                 </p>
               </div>
             </div>
+            <p>Status: {status}</p>
+        <button onClick={handleStatusToggle} className={styles.statusButton}>
+          {status === "OPEN" ? "Close Event" : "Open Event"}
+        </button>
           </div>
 
           <div>

@@ -136,26 +136,24 @@
 .number-of-participants-container {
   background-color: rgba(5, 195, 111, 1);
   width: 56px;
-  height: 25px;
+  height: 28px;
   color: white;
   border-radius: 10px;
   display: flex;
   gap: 7px;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
 }
 
 .event-tag {
   width: 115;
-  height: 23;
+  height: 25;
   border-radius: 10px;
   padding: 6px 10px 6px 10px;
   font-weight: bold;
   font-size: 14px;
   color: white;
   background-color: rgba(5, 195, 111, 1);
-  margin-top: 15px;
 }
 
 .event-description-container {
@@ -175,6 +173,12 @@
 .profileButtonRow {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.profileIconRow {
+  display: flex;
+  align-items: start;
   gap: 1rem;
 }
 

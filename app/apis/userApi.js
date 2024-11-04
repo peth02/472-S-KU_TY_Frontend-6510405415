@@ -158,3 +158,21 @@ export const quitEvent = async (eventId, userId) => {
       throw error;
     }
   };
+
+  export const updateUserImage = async (userId, formData) => {
+    try {
+      const response = await axios.put(`${API_BASE_URL}/user/${userId}/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response.data.code === 'OK') {
+        return response.data.data['imageUrl'];
+      } else {
+        throw new Error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error updating user image:', error);
+      throw error;
+    }
+  };

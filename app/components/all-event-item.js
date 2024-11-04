@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function AllEventItem({ event, userId }) {
   const router = useRouter();
@@ -76,51 +76,35 @@ export default function AllEventItem({ event, userId }) {
             มาเจอกันนะ..
           </p>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+        <div className={styles["profileIconRow"]}>
+          <div>
+            <Image
+              src="/images/participants-icon.png"
+              width={26}
+              height={26}
+              alt="Participants picture"
+            />
+          </div>
+          <div className={styles["number-of-participants-container"]}>
             <div>
               <Image
-                src="/images/default-participants-picture.png"
-                width={26}
-                height={26}
-                alt="Participants picture"
+                src="/images/participants-icon.png"
+                width={12}
+                height={11}
+                alt="Participants icon"
               />
             </div>
-
-            <div className={styles["number-of-participants-container"]}>
-              <div>
-                <Image
-                  src="/images/participants-icon.png"
-                  width={12}
-                  height={11}
-                  alt="Participants icon"
-                />
-              </div>
-              <div>
-                <p>10</p>
-              </div>
-              <div className={styles["event-tag"]}>BOARD GAME</div>
+            <div>
+              <p>10</p>
             </div>
           </div>
-          
-            <div>
-              <button onClick={handleViewDetails} className={styles["event-detail-button"]}>
-                รายละเอียด
-              </button>
-            </div>
-          
+          <div className={styles["event-tag"]}>BOARD GAME</div>{" "}
+          <button
+            onClick={handleViewDetails}
+            className={styles["event-detail-button"]}
+          >
+            รายละเอียด
+          </button>
         </div>
       </div>
     </div>

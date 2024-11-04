@@ -8,6 +8,7 @@ export class User {
       lastName,
       departmentNameTh,
       majorName,
+      imageUrl,
     }) {
       this.userId = userId;
       this.username = username;
@@ -17,5 +18,7 @@ export class User {
       this.lastName = lastName;
       this.departmentNameTh = departmentNameTh;
       this.majorName = majorName;
+      this.imageUrl = imageUrl;
     }
   }
+  
