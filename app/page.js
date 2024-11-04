@@ -86,7 +86,7 @@ export default function Home() {
                   height: "14px",
                 }}
               >
-                error
+                {error}
               </p>
             </div>
 
@@ -117,7 +117,7 @@ export default function Home() {
                   height: "14px",
                 }}
               >
-                error
+                {error}
               </p>
             </div>
 
@@ -146,7 +146,12 @@ export default function Home() {
                 เข้าสู่ระบบ
               </button>
             </div>
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p className={styles.error} style={{
+                  marginBottom: "70px",
+                  color: "rgba(238, 29, 82, 1)",
+                  fontsize: "14px",
+                  height: "14px",
+                }}>{error}</p>}
           </form>
         </div>
       </div>
