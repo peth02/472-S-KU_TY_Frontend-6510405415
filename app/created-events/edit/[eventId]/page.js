@@ -346,7 +346,7 @@ export default function Event({ params }) {
             </div>
           </div>
 
-          <div className={styles["create-event-input-container"]}>
+          <div className={styles["create-event-input-container"]} style={{display:'flex'}}>
             <div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Image
@@ -381,10 +381,17 @@ export default function Event({ params }) {
                 </p>
               </div>
             </div>
-            <p>Status: {status}</p>
-        <button onClick={handleStatusToggle} className={styles.statusButton}>
-          {status === "OPEN" ? "Close Event" : "Open Event"}
-        </button>
+            <div style={{ marginLeft: 35 }} className={styles['edit-event-button-status']}>
+              <p  className={styles["create-event-text"] }
+                style={{whiteSpace:'nowrap'}}
+              >Status: {status}</p>
+              <button 
+                onClick={handleStatusToggle} 
+                className={`${styles['status-button']} ${status === "OPEN" ? styles['status-open'] : styles['status-close']}`}
+              >
+                {status === "OPEN" ? "Close Event" : "Open Event"}
+              </button>
+            </div>
           </div>
 
           <div>

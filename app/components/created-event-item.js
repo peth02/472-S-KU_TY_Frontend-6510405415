@@ -102,20 +102,6 @@ export default function CreatedEventItem({ event, onDelete }) {
             {event.description ? event.description : "ไม่มีคำอธิบายเพิ่มเติม"}
           </p>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
             <div
               style={{
                 display: "flex",
@@ -124,18 +110,12 @@ export default function CreatedEventItem({ event, onDelete }) {
               }}
             >
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <div
                   style={{
                     display: "flex",
                     justifyItems: "center",
                     alignItems: "center",
+                    flexDirection:'column',
+                    gap:5
                   }}
                 >
                   
@@ -156,7 +136,7 @@ export default function CreatedEventItem({ event, onDelete }) {
                 </div>
                 <div className={styles["event-tag"]}>BOARD GAME</div>
               </div>
-            </div>
+
               <div
                 style={{
                   display: "flex",
@@ -171,8 +151,6 @@ export default function CreatedEventItem({ event, onDelete }) {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );

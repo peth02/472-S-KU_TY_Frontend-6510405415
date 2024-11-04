@@ -149,10 +149,34 @@
   border-color: black;
 }
 
-.create-event-input-event-date, .create-event-input-event-time, .create-event-input-event-location, .create-event-input-event-category{
+.create-event-input-event-date, .create-event-input-event-time, .create-event-input-event-location, .create-event-input-event-category, .create-event-input-container, .edit-event-button-status{
   width: 211px;
 }
 
 .create-event-input-event-description{
   height: 154px;
+}
+
+/* ในไฟล์ CSS ของคุณ */
+.status-button {
+  margin-top: 15px;
+  font-size: 16px;
+  height: 40px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.status-open {
+  background-color: rgba(0, 143, 70, 1); /* สีเขียว */
+}
+
+.status-close {
+  background-color: rgba(220, 53, 69, 1); /* สีแดง */
 }

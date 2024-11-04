@@ -30,7 +30,19 @@ export default function AllEvent() {
   }
 
   if (events.length === 0) {
-    return <div>Loading...</div>;
+    return <div 
+    style={{
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      width: '100vw', 
+      height: '100vh', 
+      fontWeight: 'bold',
+      fontSize: 88,
+    }}
+  >
+    ไม่มีอีเวนต์ ในตอนนี้
+  </div>
   }
 
   return (
