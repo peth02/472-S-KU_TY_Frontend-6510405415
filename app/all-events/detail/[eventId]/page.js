@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { fetchEventData, fetchAllJoinedUsers } from "../../../apis/eventApi";
+import { fetchEventData, fetchAllJoinedUsers, deleteParticipant } from "../../../apis/eventApi";
 import { joinEvent } from "../../../apis/userApi";
 import { useRouter } from 'next/navigation';
 import { useUserContext } from "../../../UserContext";
@@ -17,6 +17,7 @@ export default function Event({ params }) {
   const [error, setError] = useState(null);
   const [hasJoined, setHasJoined] = useState(false);
   const [isCreator, setIsCreator] = useState(false);
+  const [participants, setParticipants] = useState(false);
 
   useEffect(() => {
     params.then((resolvedParams) => {
@@ -32,6 +33,7 @@ export default function Event({ params }) {
       fetchAllJoinedUsers(eventId)
         .then((joinedUsers) => {
           console.log("Joined Users:", joinedUsers);
+          setParticipants(joinedUsers)
           const userHasJoined = joinedUsers.some(user => user.userId === userId);
           setHasJoined(userHasJoined);
           console.log("User has joined:", userHasJoined);
@@ -54,7 +56,7 @@ export default function Event({ params }) {
           setError(error);
         });
     }
-  }, [userId, eventId]);
+  }, [userId, eventId, hasJoined]);
 
   const handleNavigateToParticipants = () => {
     router.push(`/all-events/participants/${eventId}`);
@@ -67,12 +69,25 @@ export default function Event({ params }) {
   const handleJoinEvent = async () => {
     try {
       const message = await joinEvent({eventId, userId});
-      setHasJoined(true); // Update the state to indicate the user has joined
-      router.push('/joined-events');
+      setHasJoined(true); 
     } catch (error) {
       setError(error.message);
     }
   };
+
+  const handleKickUser = async (participantId) => {
+    const isConfirmed = window.confirm("คุณแน่ใจหรือไม่ว่าต้องการเตะผู้ใช้นี้?");
+    if (!isConfirmed) return;
+
+    try {
+      const message = await deleteParticipant(participantId, eventId, userId);
+      console.log("Success:", message);
+      setParticipants(prev => prev.filter(user => user.userId !== participantId)); 
+    } catch (error) {
+      console.error("Error kicking user:", error);
+    }
+    
+  }
 
   if (error) {
     return <div>Error loading event details: {error.message}</div>;
@@ -223,6 +238,29 @@ export default function Event({ params }) {
             ? `${eventDetails["description"]}`
             : "ไม่มีรายละเอียด"}
         </p>
+      </div>
+
+      <div className={styles["event-participants"]}>
+        <p style={{ fontWeight: "bold", fontSize: 24 }}>ผู้เข้าร่วมอีเวนต์</p>
+        <ul className={styles["participants-list"]}>
+          {participants.length > 0 ? (
+            participants.map((participant) => (
+              <li key={participant.userId} className={styles["participant-item"]}>
+                <span>{participant.firstName} {participant.lastName}</span>
+                {isCreator && (
+                  <button
+                    className={styles["kick-button"]}
+                    onClick={() => handleKickUser(participant.userId)}
+                  >
+                    Kick
+                  </button>
+                )}
+              </li>
+            ))
+          ) : (
+            <p>ยังไม่มีผู้เข้าร่วม</p>
+          )}
+        </ul>
       </div>
     </div>
   );
