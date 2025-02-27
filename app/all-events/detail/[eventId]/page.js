@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { fetchEventData, fetchAllJoinedUsers, deleteParticipant } from "../../../apis/eventApi";
-import { joinEvent } from "../../../apis/userApi";
+import { fetchAllFeedback,sendFeedback } from "@/app/apis/feedbackApi";
+import { joinEvent, fetchAllUsers } from "../../../apis/userApi";
 import { useRouter } from 'next/navigation';
 import { useUserContext } from "../../../UserContext";
 
@@ -18,6 +19,9 @@ export default function Event({ params }) {
   const [hasJoined, setHasJoined] = useState(false);
   const [isCreator, setIsCreator] = useState(false);
   const [participants, setParticipants] = useState(false);
+  const [feedback, setFeedback] = useState(false);
+  const [allUsers, setAllUsers] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
 
   useEffect(() => {
     params.then((resolvedParams) => {
@@ -29,6 +33,14 @@ export default function Event({ params }) {
     if (userId && eventId) {
       console.log("Event ID:", eventId);
       console.log("User ID:", userId);
+
+      fetchAllUsers().then((allUser) => {
+        console.log('All Users:', allUser);
+        setAllUsers(allUser);
+      }).catch((error) => {
+        console.error("Error fetching all users:", error);
+        setError(error);
+      })
 
       fetchAllJoinedUsers(eventId)
         .then((joinedUsers) => {
@@ -55,8 +67,17 @@ export default function Event({ params }) {
           console.error("Error fetching event data:", error);
           setError(error);
         });
+      
+      fetchAllFeedback(eventId)
+        .then((data) => {
+          console.log("Feedback Data:",data)
+          setFeedback(data);
+        }).catch((error) => {
+          console.error("Error fetching feedback data:", error);
+          setError(error);
+        });
     }
-  }, [userId, eventId, hasJoined]);
+  }, [userId, eventId,feedbackText]);
 
   const handleNavigateToParticipants = () => {
     router.push(`/all-events/participants/${eventId}`);
@@ -86,8 +107,46 @@ export default function Event({ params }) {
     } catch (error) {
       console.error("Error kicking user:", error);
     }
-    
   }
+
+  const handleFeedbackChange = (e) => {
+    setFeedbackText(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const newFeedback = { userId, eventId, feedback: feedbackText };
+    console.log("newFeedback:", newFeedback);
+
+    const isConfirmed = window.confirm("คุณต้องการส่งความคิดเห็นนี้ใช่หรือไม่?");
+    if (!isConfirmed) return;
+
+    try {
+      await sendFeedback(newFeedback);
+      setFeedbackText("");
+    } catch (error) {
+      console.error("Error sending feedback:", error);
+    }
+  };
+
+  const handleAnonymousSubmit = async () => {
+    const newFeedback = {userId: null, eventId, feedback: feedbackText};
+
+    const isConfirmed = window.confirm("คุณต้องการส่งความคิดเห็นนี้ใช่หรือไม่?");
+    if (!isConfirmed) return;
+    try {
+      await sendFeedback(newFeedback);
+      setFeedbackText("");
+    } catch (error) {
+      console.error("Error sending feedback:", error);
+    }
+  }
+
+
+
+  const findUserById = (userId) => {
+    const user = allUsers.find(user => user.userId === userId);
+    return user ? user.firstName : 'ไม่ระบุตัวตน';
+  };
 
   if (error) {
     return <div>Error loading event details: {error.message}</div>;
@@ -262,6 +321,46 @@ export default function Event({ params }) {
           )}
         </ul>
       </div>
+
+      <div className={styles["event-feedback"]}>
+        <p style={{ fontWeight: "bold", fontSize: 24 }}>ความคิดเห็นจากผู้เข้าร่วม</p>
+        <ul className={styles["feedback-list"]}>
+          {feedback && feedback.length > 0 ? (
+            feedback.map((item, index) => (
+              <li key={index} className={styles["feedback-item"]}>
+                <p className={styles["feedback-user"]}>{findUserById(item.userId)}</p>
+                <p className={styles["feedback-text"]}>{item.feedback}</p>
+              </li>
+            ))
+          ) : (
+            <p>ยังไม่มีความคิดเห็น</p>
+          )}
+        </ul>
+      </div>
+
+      <div className={styles["feedback-section"]}>
+        <textarea
+          className={styles["feedback-input"]}
+          placeholder="เขียน Feedback เกี่ยวกับอีเวนต์..."
+          value={feedbackText}
+          onChange={handleFeedbackChange}
+        />
+        <div className={styles["feedback-button-group"]}>
+          <button className={styles["feedback-button"]} onClick={handleSubmit}>
+            ส่ง Feedback
+          </button>
+          <button
+            className={styles["feedback-button-anonymous"]}
+            onClick={handleAnonymousSubmit}
+          >
+            ส่ง Feedback แบบไม่ระบุตัวตน
+          </button>
+        </div>
+      </div>
+
+
+
+
     </div>
   );
 }
