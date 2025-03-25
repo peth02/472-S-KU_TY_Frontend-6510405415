@@ -5,6 +5,7 @@ import { Feedback, feedback } from "../models/feedback";
 
 const API_BASE_URL = "http://localhost:8080";
 
+
 export const fetchAllEvents = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/event`);
