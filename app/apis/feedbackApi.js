@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Feedback } from "../models/feedback";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://kuty-backend-1-0-0.onrender.com";
 
 export const fetchAllFeedback = async (eventId) => {
   try {
